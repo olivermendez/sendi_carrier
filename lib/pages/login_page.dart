@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
@@ -29,9 +30,11 @@ class _LoginPageState extends State<LoginPage> {
   String? _email;
   String? _password;
   bool _rememberme = true;
+  bool? _passwordVisible;
 
   @override
   void initState() {
+    _passwordVisible = false;
     super.initState();
     //_obscurePassword = true;
     //_emailController = TextEditingController();
@@ -62,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _logoSendiCarrier() {
-    return const Text("SENDI CARRIERS");
+    return const Text("SENDI CARRIERS!");
   }
 
   // ignore: non_constant_identifier_names
@@ -81,12 +84,15 @@ class _LoginPageState extends State<LoginPage> {
                 hintText: 'Insert your email',
                 labelText: "Email",
                 suffixIcon: Icon(Icons.email),
+                prefixIcon: Icon(Icons.alternate_email),
                 filled: true,
                 isDense: true,
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Please enter some text";
+                } else if (!EmailValidator.validate(_email!)) {
+                  return "Please enter valid email";
                 }
                 return null;
               },
@@ -103,23 +109,34 @@ class _LoginPageState extends State<LoginPage> {
 
             //PASSWORD AREA
             TextFormField(
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Password',
                 hintText: "Insert your password",
                 filled: true,
                 isDense: true,
-                suffixIcon: Icon(Icons.account_box),
+                prefixIcon: IconButton(
+                    icon: Icon(
+                      _passwordVisible!
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _passwordVisible = !_passwordVisible!;
+                      });
+                    }),
+                suffixIcon: const Icon(Icons.account_box),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "Please enter some text";
+                  return "Please enter your password";
                 }
                 return null;
               },
               onChanged: (value) {
                 _password = value;
               },
-              obscureText: true,
+              obscureText: !_passwordVisible!,
               //controller: _passwordController,
               keyboardType: TextInputType.visiblePassword,
               //autocorrect: false,
@@ -130,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             CheckboxListTile(
-                title: const Text("Rememberme"),
+                title: const Text("Remember me"),
                 value: _rememberme,
                 onChanged: (value) {
                   setState(() {
@@ -145,13 +162,14 @@ class _LoginPageState extends State<LoginPage> {
                       content: Text("Logged"),
                       backgroundColor: Colors.green,
                     ));
-                  }
 
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                    (Route<dynamic> route) => false,
-                  );
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
+                      (Route<dynamic> route) => false,
+                    );
+                  }
                 },
                 child: const Text("Login Now")),
             const SizedBox(
