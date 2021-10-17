@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sendi_carriers/pages/login_page.dart';
+import 'package:sendi_carriers/pages/register_page.dart';
 import 'package:sendi_carriers/pages/welcome_screen.dart';
 
 class AppRouter {
@@ -9,6 +11,10 @@ class AppRouter {
     switch (settings.name) {
       case '/welcome':
         return WelcomeScreen.route();
+      case LoginPage.routenName:
+        return LoginPage.route();
+      case RegisterPage.routenName:
+        return RegisterPage.route();
 
       default:
         return _errorRoute();
