@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-
+//import 'package:shared_preferences/shared_preferences.dart';
 import 'home_screen.dart';
+
+import 'package:http/http.dart' as http;
 
 //import 'home_page.dart';
 
@@ -82,8 +86,8 @@ class _LoginPageState extends State<LoginPage> {
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 hintText: 'Insert your email',
-                labelText: "Email",
-                suffixIcon: Icon(Icons.email),
+                //labelText: "Email",
+                //suffixIcon: Icon(Icons.email),
                 prefixIcon: Icon(Icons.alternate_email),
                 filled: true,
                 isDense: true,
@@ -110,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
             //PASSWORD AREA
             TextFormField(
               decoration: InputDecoration(
-                labelText: 'Password',
+                //labelText: 'Password',
                 hintText: "Insert your password",
                 filled: true,
                 isDense: true,
@@ -125,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                         _passwordVisible = !_passwordVisible!;
                       });
                     }),
-                suffixIcon: const Icon(Icons.account_box),
+                //suffixIcon: const Icon(Icons.account_box),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -158,17 +162,11 @@ class _LoginPageState extends State<LoginPage> {
             ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    login();
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Logged"),
                       backgroundColor: Colors.green,
                     ));
-
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                      (Route<dynamic> route) => false,
-                    );
                   }
                 },
                 child: const Text("Login Now")),
@@ -185,5 +183,30 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void login() async {
+    Map<String, dynamic> request = {"email": _email, "password": _password};
+
+    var url = Uri.parse('http://localhost:5000/api/v1/auth/login');
+
+    var response = await http.post(url, body: jsonEncode(request), headers: {
+      'content-type': 'application/json',
+      'accept': 'application/json'
+    });
+
+    print(response.body);
+    print(_email);
+    print(_password);
+
+    //sharedPreferences.setString("token", jsonResponse["token"]);
+
+    //Navigator.pushAndRemoveUntil(
+    //  context,
+    //  MaterialPageRoute(builder: (context) => const HomeScreen()),
+    //  (Route<dynamic> route) => false,
+    //);
+
+    //var res = await http.post(url, body: body);
   }
 }

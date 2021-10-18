@@ -16,14 +16,12 @@ class _FindShipmentsState extends State<FindShipments> {
       appBar: AppBar(
         title: const Text("Find Shipments"),
       ),
-      body: Container(
-        child: ListView.builder(itemBuilder: (context, index) {
-          return Container(
-            height: 100,
-            color: Colors.red,
-          );
-        }),
-      ),
+      body: ListView.builder(itemBuilder: (context, index) {
+        return Container(
+          height: 100,
+          color: Colors.red,
+        );
+      }),
     );
   }
 }
