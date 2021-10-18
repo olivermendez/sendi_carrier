@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sendi_carriers/models/token.dart';
 
 import 'find_shipments_screen.dart';
 import 'my_account_screen.dart';
@@ -6,15 +7,9 @@ import 'my_notifications.dart';
 import 'my_shipments_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  static const String routeName = '/home';
-  static Route route() {
-    return MaterialPageRoute(
-      builder: (_) => const HomeScreen(),
-      settings: const RouteSettings(name: routeName),
-    );
-  }
+  final Token token;
+  // ignore: use_key_in_widget_constructors
+  const HomeScreen({required this.token});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();

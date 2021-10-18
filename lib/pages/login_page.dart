@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:sendi_carriers/config/constant.dart';
+import 'package:sendi_carriers/models/token.dart';
+import 'package:sendi_carriers/pages/home_page.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
-import 'home_screen.dart';
 
 import 'package:http/http.dart' as http;
-
-//import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
           _logoSendiCarrier(),
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: _LoginForm(),
+            child: loginForm(),
           ),
         ],
       ),
@@ -72,8 +72,7 @@ class _LoginPageState extends State<LoginPage> {
     return const Text("SENDI CARRIERS!");
   }
 
-  // ignore: non_constant_identifier_names
-  Widget _LoginForm() {
+  Widget loginForm() {
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -86,8 +85,6 @@ class _LoginPageState extends State<LoginPage> {
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 hintText: 'Insert your email',
-                //labelText: "Email",
-                //suffixIcon: Icon(Icons.email),
                 prefixIcon: Icon(Icons.alternate_email),
                 filled: true,
                 isDense: true,
@@ -188,24 +185,32 @@ class _LoginPageState extends State<LoginPage> {
   void login() async {
     Map<String, dynamic> request = {"email": _email, "password": _password};
 
-    var url = Uri.parse('http://localhost:5000/api/v1/auth/login');
+    var url = Uri.parse('${Constants.apiUrl}auth/login');
 
-    var response = await http.post(url, body: jsonEncode(request), headers: {
-      'content-type': 'application/json',
-      'accept': 'application/json'
-    });
+    var response = await http.post(
+      url,
+      body: jsonEncode(request),
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
+    );
 
-    print(response.body);
-    print(_email);
-    print(_password);
+    //TODO: Comprobar que la conexion esta habilitada
+
+    var body = response.body;
+    var decodedJson = jsonDecode(body);
+    var token = Token.fromJson(decodedJson);
+
+    //print(token.token);
 
     //sharedPreferences.setString("token", jsonResponse["token"]);
 
-    //Navigator.pushAndRemoveUntil(
-    //  context,
-    //  MaterialPageRoute(builder: (context) => const HomeScreen()),
-    //  (Route<dynamic> route) => false,
-    //);
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage(token: token)),
+      (Route<dynamic> route) => false,
+    );
 
     //var res = await http.post(url, body: body);
   }
