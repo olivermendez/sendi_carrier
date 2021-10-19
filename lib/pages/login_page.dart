@@ -196,6 +196,7 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
+    // ignore: todo
     //TODO: Comprobar que la conexion esta habilitada
 
     var body = response.body;

@@ -56,23 +56,19 @@ class _RegisterPageState extends State<RegisterPage> {
       },
     );
 
+    // ignore: avoid_print
     print(response.body);
   }
-
-  //@override
-  //void initState() {
-  //  super.initState();
-  //_obscurePassword = true;
-  //  _emailController = TextEditingController();
-  //  _passwordController = TextEditingController();
-  //  _phoneNumberController = TextEditingController();
-  //}
 
   @override
   void dispose() {
     // Limpia el controlador cuando el Widget se descarte
     _nameController.dispose();
     _usernameController.dispose();
+    _emailController.dispose();
+    _cedulaController.dispose();
+    _passwordController.dispose();
+    _phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -94,7 +90,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  // ignore: non_constant_identifier_names
   Widget _regiterForm() {
     return Form(
       key: _formKey,

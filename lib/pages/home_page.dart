@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Find shipments"),
+        title: const Text("Find shipments", style: TextStyle(fontSize: 20)),
       ),
       body: Center(
         child: Text('Bievenido ${widget.token.user.name}'),

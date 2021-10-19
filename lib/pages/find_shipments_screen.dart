@@ -13,7 +13,6 @@ class FindShipments extends StatefulWidget {
 class _FindShipmentsState extends State<FindShipments> {
   @override
   Widget build(BuildContext context) {
-    //final args = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Bienvenido "),

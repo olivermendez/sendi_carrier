@@ -3,6 +3,15 @@ import 'package:flutter/material.dart';
 ThemeData themeCarrier() {
   return ThemeData(
     appBarTheme: const AppBarTheme(
+      // ignore: deprecated_member_use
+      textTheme: TextTheme(
+        headline1: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 36,
+        ),
+      ),
+
       backgroundColor: Color.fromRGBO(37, 59, 128, 5),
       elevation: 0,
     ),
@@ -11,7 +20,7 @@ ThemeData themeCarrier() {
     primaryColorLight: const Color(0xFFFE9AAA),
     scaffoldBackgroundColor: Colors.white,
     backgroundColor: const Color.fromRGBO(37, 59, 128, 5),
-    fontFamily: 'Futura',
+    //fontFamily: 'Futura',
     textTheme: const TextTheme(
       headline1: TextStyle(
         color: Colors.white,
@@ -26,7 +35,7 @@ ThemeData themeCarrier() {
       headline3: TextStyle(
         color: Color(0xFF1B070B),
         fontWeight: FontWeight.bold,
-        fontSize: 18,
+        fontSize: 24,
       ),
       headline4: TextStyle(
         color: Color(0xFF1B070B),
