@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:sendi_carriers/config/constant.dart';
 import 'package:sendi_carriers/pages/login_page.dart';
+
+import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -20,17 +25,55 @@ class _RegisterPageState extends State<RegisterPage> {
 
   //bool? _obscurePassword;
   //bool? _autovalidate;
-  TextEditingController? _emailController;
-  TextEditingController? _passwordController;
-  TextEditingController? _phoneNumberController;
+  final _nameController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _cedulaController = TextEditingController();
+  final String _role = "carrier";
+  final _passwordController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+
+  void userRegister(String name, String username, String email, String cedula,
+      String role, String password, String phoneNumer) async {
+    Map<String, dynamic> request = {
+      "name": name,
+      "username": username,
+      "email": email,
+      "phone": phoneNumer,
+      "cedula": cedula,
+      "role": role,
+      "password": password
+    };
+
+    var url = Uri.parse('${Constants.apiUrl}auth/register');
+
+    var response = await http.post(
+      url,
+      body: jsonEncode(request),
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
+    );
+
+    print(response.body);
+  }
+
+  //@override
+  //void initState() {
+  //  super.initState();
+  //_obscurePassword = true;
+  //  _emailController = TextEditingController();
+  //  _passwordController = TextEditingController();
+  //  _phoneNumberController = TextEditingController();
+  //}
 
   @override
-  void initState() {
-    super.initState();
-    //_obscurePassword = true;
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
-    _phoneNumberController = TextEditingController();
+  void dispose() {
+    // Limpia el controlador cuando el Widget se descarte
+    _nameController.dispose();
+    _usernameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -59,6 +102,49 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            //NAME
+
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Your name',
+                filled: true,
+                isDense: true,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please enter your name";
+                }
+                return null;
+              },
+              controller: _nameController,
+              keyboardType: TextInputType.name,
+              autocorrect: false,
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+
+            //USERNAME
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'username',
+                filled: true,
+                isDense: true,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please define your username";
+                }
+                return null;
+              },
+              controller: _usernameController,
+              keyboardType: TextInputType.name,
+              autocorrect: false,
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+
             //EMAIL AREA
             TextFormField(
               decoration: const InputDecoration(
@@ -74,6 +160,48 @@ class _RegisterPageState extends State<RegisterPage> {
               },
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
+              autocorrect: false,
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+
+            //PHONE
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'phone number',
+                filled: true,
+                isDense: true,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please define your username";
+                }
+                return null;
+              },
+              controller: _phoneNumberController,
+              keyboardType: TextInputType.phone,
+              autocorrect: false,
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+
+            //CEDULA
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Cedula',
+                filled: true,
+                isDense: true,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please define your cedula";
+                }
+                return null;
+              },
+              controller: _cedulaController,
+              keyboardType: TextInputType.text,
               autocorrect: false,
             ),
             const SizedBox(
@@ -103,43 +231,29 @@ class _RegisterPageState extends State<RegisterPage> {
               height: 12,
             ),
 
-            //PHONE NUMBER AREA
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Phone number',
-                filled: true,
-                isDense: true,
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "Please enter some text";
-                }
-                return null;
-              },
-              obscureText: false,
-              controller: _phoneNumberController,
-              keyboardType: TextInputType.phone,
-              //autocorrect: false,
-            ),
-
-            const SizedBox(
-              height: 20,
-            ),
-
             ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    userRegister(
+                        _nameController.text,
+                        _usernameController.text,
+                        _emailController.text,
+                        _cedulaController.text,
+                        _role,
+                        _passwordController.text,
+                        _phoneNumberController.text);
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Registered"),
                       backgroundColor: Colors.green,
                     ));
-                  }
 
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                    (Route<dynamic> route) => false,
-                  );
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
+                      (Route<dynamic> route) => false,
+                    );
+                  }
                 },
                 child: const Text(
                   "Register",

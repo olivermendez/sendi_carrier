@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/pages/login_page.dart';
+import 'package:sendi_carriers/pages/register_page.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -33,6 +34,14 @@ class WelcomeScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => const LoginPage()));
               },
               child: const Text('Login')),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RegisterPage()));
+              },
+              child: const Text('Register')),
         ],
       ),
     );
