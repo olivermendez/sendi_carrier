@@ -13,6 +13,8 @@ class Token {
       username: '',
       email: '',
       role: '',
+      cedula: '',
+      phone: '',
       password: '',
       createdAt: DateTime.now(),
       v: 0);

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/config/constant.dart';
-import 'package:sendi_carriers/pages/login_page.dart';
+import 'package:sendi_carriers/pages/welcome_login_register/login_page.dart';
 
 import 'package:http/http.dart' as http;
 

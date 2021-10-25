@@ -205,7 +205,13 @@ class _LoginPageState extends State<LoginPage> {
 
     //print(token.token);
 
-    //sharedPreferences.setString("token", jsonResponse["token"]);
+    //SharedPreferences _prefs = await SharedPreferences.getInstance();
+
+    //await _prefs.setString('token', token.token);
+
+    //var saveToken = _prefs.getString('token');
+
+    //print(saveToken);
 
     Navigator.pushAndRemoveUntil(
       context,

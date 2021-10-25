@@ -6,6 +6,8 @@ class User {
     required this.email,
     required this.role,
     required this.password,
+    required this.cedula,
+    required this.phone,
     required this.createdAt,
     required this.v,
   });
@@ -16,6 +18,8 @@ class User {
   String email;
   String role;
   String password;
+  String cedula;
+  String phone;
   DateTime createdAt;
   int v;
 
@@ -26,6 +30,8 @@ class User {
         email: json["email"],
         role: json["role"],
         password: json["password"],
+        cedula: json["cedula"],
+        phone: json["phone"],
         createdAt: DateTime.parse(json["createdAt"]),
         // ignore: prefer_if_null_operators
         v: json["__v"] == null ? null : json["__v"],
@@ -38,6 +44,8 @@ class User {
         "email": email,
         "role": role,
         "password": password,
+        "cedula": cedula,
+        "phone": phone,
         "createdAt": createdAt.toIso8601String(),
         "__v": v,
       };

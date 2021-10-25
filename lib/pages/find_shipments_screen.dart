@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-//import 'package:sendi_carriers/models/commodities_model.dart';
-//import 'package:sendi_carriers/services/find_shipments.dart';
-
 class FindShipments extends StatefulWidget {
   const FindShipments({Key? key}) : super(key: key);
 
@@ -15,7 +12,7 @@ class _FindShipmentsState extends State<FindShipments> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Bienvenido "),
+        title: const Text("Find Shipments"),
       ),
       body: ListView.builder(itemBuilder: (context, index) {
         return Container(

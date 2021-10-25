@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sendi_carriers/pages/login_page.dart';
-import 'package:sendi_carriers/pages/register_page.dart';
+import 'package:sendi_carriers/pages/welcome_login_register/login_page.dart';
+import 'package:sendi_carriers/pages/welcome_login_register/register_page.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
