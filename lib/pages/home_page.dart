@@ -6,7 +6,10 @@ import 'package:sendi_carriers/models/listing_response.dart';
 import 'package:sendi_carriers/models/token.dart';
 import 'package:sendi_carriers/pages/my_account_page.dart';
 import 'package:sendi_carriers/pages/payments_page.dart';
+import 'package:sendi_carriers/providers/listing_provider.dart';
 import 'package:sendi_carriers/widgets/drawer_header.dart';
+
+import 'package:provider/provider.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -19,7 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<ListingResponse> _listing = [];
+  //final listingProvider = Provider.of<ListingProvider>(context);
 
   @override
   initState() {
@@ -51,25 +54,29 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getListing() async {
-    var url = Uri.parse('${Constants.apiUrl}listings/');
-
-    var response = await http.get(
-      url,
-      headers: {
-        'content-type': 'application/json',
-        'accept': 'application/json',
-        'authorization': "Bearer ${widget.token.token}"
-      },
-    );
-
-    final nowListingResponse = ListingResponse.fromJson(response.body);
-
-    print(nowListingResponse.results[0].title);
+    ListingProvider().getListing(widget.token);
   }
 
-  Widget _getContent() {
-    return _listing.length == 0 ? _noContent() : _getListViewListing();
-  }
+  //void _getListing() async {
+  //  var url = Uri.parse('${Constants.apiUrl}listings/');
+
+  //  var response = await http.get(
+  //    url,
+  //    headers: {
+  //      'content-type': 'application/json',
+  //      'accept': 'application/json',
+  //      'authorization': "Bearer ${widget.token.token}"
+  //    },
+  //  );
+
+  //  final nowListingResponse = ListingResponse.fromJson(response.body);
+
+  //  print(nowListingResponse.results[0].title);
+  //}
+
+  //Widget _getContent() {
+  //return _listing.length == 0 ? _noContent() : _getListViewListing();
+  //}
 
   Widget _noContent() {
     return Center(

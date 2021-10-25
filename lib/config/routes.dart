@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sendi_carriers/pages/my_account_page.dart';
 import 'package:sendi_carriers/pages/welcome_login_register/login_page.dart';
 import 'package:sendi_carriers/pages/welcome_login_register/register_page.dart';
 import 'package:sendi_carriers/pages/welcome_login_register/welcome_screen.dart';
