@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:sendi_carriers/config/constant.dart';
+import 'package:sendi_carriers/models/listing_model.dart';
 import 'package:sendi_carriers/models/token.dart';
 import 'package:sendi_carriers/pages/my_account_page.dart';
 import 'package:sendi_carriers/pages/payments_page.dart';
 import 'package:sendi_carriers/widgets/drawer_header.dart';
+
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   final Token token;
@@ -13,6 +19,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Listing> _listing = [];
+
+  @override
+  initState() {
+    super.initState();
+    _getListing();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Find Shipments"),
       ),
       body: Center(
-        child: Text("hola ${widget.token.user.name}!"),
+        child: Text("Hola ${widget.token.user.name}!"),
       ),
       drawer: Drawer(
         child: ListView(
@@ -34,6 +48,28 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void _getListing() async {
+    var url = Uri.parse('${Constants.apiUrl}listings/');
+
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'authorization': "Bearer ${widget.token.token}"
+      },
+    );
+
+    var body = response.body;
+    var decodedJson = jsonDecode(body);
+    if (decodedJson != null) {
+      for (var item in decodedJson['getlistings']) {
+        _listing.add(Listing.fromJson(item));
+      }
+    }
+    print(_listing);
   }
 
   Widget myDrawerListOption() {
