@@ -1,8 +1,8 @@
-import 'dart:convert';
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/config/constant.dart';
-import 'package:sendi_carriers/models/listing_model.dart';
+import 'package:sendi_carriers/models/listing_response.dart';
 import 'package:sendi_carriers/models/token.dart';
 import 'package:sendi_carriers/pages/my_account_page.dart';
 import 'package:sendi_carriers/pages/payments_page.dart';
@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Listing> _listing = [];
+  List<ListingResponse> _listing = [];
 
   @override
   initState() {
@@ -62,14 +62,23 @@ class _HomePageState extends State<HomePage> {
       },
     );
 
-    var body = response.body;
-    var decodedJson = jsonDecode(body);
-    if (decodedJson != null) {
-      for (var item in decodedJson['getlistings']) {
-        _listing.add(Listing.fromJson(item));
-      }
-    }
-    print(_listing);
+    final nowListingResponse = ListingResponse.fromJson(response.body);
+
+    print(nowListingResponse.results[0].title);
+  }
+
+  Widget _getContent() {
+    return _listing.length == 0 ? _noContent() : _getListViewListing();
+  }
+
+  Widget _noContent() {
+    return Center(
+      child: Text("no content"),
+    );
+  }
+
+  Widget _getListViewListing() {
+    return Container();
   }
 
   Widget myDrawerListOption() {
