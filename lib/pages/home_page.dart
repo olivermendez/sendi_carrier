@@ -1,18 +1,10 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/config/constant.dart';
 import 'package:sendi_carriers/models/listing.dart';
 import 'package:sendi_carriers/models/listing_response.dart';
-//import 'package:sendi_carriers/config/constant.dart';
-//import 'package:sendi_carriers/models/listing_response.dart';
 import 'package:sendi_carriers/models/token.dart';
 import 'package:sendi_carriers/pages/my_account_page.dart';
 import 'package:sendi_carriers/pages/payments_page.dart';
-import 'package:sendi_carriers/providers/listing_provider.dart';
-import 'package:sendi_carriers/widgets/drawer_header.dart';
-
-import 'package:provider/provider.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -46,8 +38,6 @@ class _HomePageState extends State<HomePage> {
       final nowListingResponse = ListingResponse.fromJson(response.body);
 
       return nowListingResponse;
-
-      //print(nowListingResponse.results);
     }
 
     return Scaffold(
@@ -58,11 +48,8 @@ class _HomePageState extends State<HomePage> {
         future: getData(),
         builder: (context, AsyncSnapshot<ListingResponse?> snapshot) {
           if (!snapshot.hasData) {
-            return Center(
-              child: Text("no data"),
-            );
+            return const Center(child: CircularProgressIndicator());
           } else {
-            print(snapshot.data!.results);
             return _Listings(snapshot.data!.results);
           }
         },
@@ -126,8 +113,55 @@ class _Listings extends StatelessWidget {
         itemCount: _listings.length,
         itemBuilder: (context, index) {
           final listing = _listings[index];
-          return ListTile(
-            title: Text(listing.title),
+          return Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: SizedBox(
+              height: 210,
+              child: Card(
+                elevation: 4,
+                child: Column(
+                  children: [
+                    Text(
+                      listing.title,
+                      style: const TextStyle(fontWeight: FontWeight.w300),
+                    ),
+                    SizedBox(),
+                    ListTile(
+                      title: Text(
+                        listing.title,
+                        style: const TextStyle(fontWeight: FontWeight.w300),
+                      ),
+                      subtitle: Text(
+                        listing.addressFrom,
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                      leading: Icon(
+                        Icons.north_east,
+                        color: Colors.blue[500],
+                      ),
+                    ),
+                    //const Divider(),
+                    ListTile(
+                      title: Text(
+                        listing.addressTo,
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      leading: Icon(
+                        Icons.south_east,
+                        color: Colors.blue[500],
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(listing.price.toString()),
+                      leading: Icon(
+                        Icons.price_change,
+                        color: Colors.blue[500],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         });
   }

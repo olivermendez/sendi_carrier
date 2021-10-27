@@ -78,4 +78,28 @@ class Listing {
         v: json["__v"],
         resultId: json["id"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "contact": contact!.toJson(),
+        "locationFrom": locationFrom.toJson(),
+        "locationTo": locationTo.toJson(),
+        "comodity": comodity,
+        "_id": id,
+        "title": title,
+        "description": description,
+        "phone": phone,
+        "addressFrom": addressFrom,
+        "addressTo": addressTo,
+        "photo": photo,
+        "price": price,
+        "widthInMeters": widthInMeters,
+        "lengthInMeters": lengthInMeters,
+        "heightInMeters": heightInMeters,
+        "weightInGrams": weightInGrams,
+        "unitCount": unitCount,
+        "user": user,
+        "createdAt": createdAt.toIso8601String(),
+        "__v": v,
+        "id": resultId,
+      };
 }
