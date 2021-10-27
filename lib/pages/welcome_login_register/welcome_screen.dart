@@ -5,7 +5,7 @@ import 'package:sendi_carriers/pages/welcome_login_register/register_page.dart';
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
-  static const String routeName = '/welcome';
+  static const String routeName = 'welcome';
   static Route route() {
     return MaterialPageRoute(
       builder: (_) => const WelcomeScreen(),

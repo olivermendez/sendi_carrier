@@ -109,12 +109,12 @@ class _Listings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cardImage =
-        NetworkImage('https://source.unsplash.com/random/800x600?house');
     return ListView.builder(
         itemCount: _listings.length,
         itemBuilder: (context, index) {
           final listing = _listings[index];
+
+          //var cardImage
           return Card(
               elevation: 10.0,
               child: Column(
@@ -127,7 +127,7 @@ class _Listings extends StatelessWidget {
                   SizedBox(
                     height: 100.0,
                     child: Ink.image(
-                      image: cardImage,
+                      image: NetworkImage(listing.photo),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -161,7 +161,10 @@ class _Listings extends StatelessWidget {
                       ),
                       TextButton(
                         child: const Text('LEARN MORE'),
-                        onPressed: () {/* ... */},
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'detail',
+                              arguments: _listings[index]);
+                        },
                       )
                     ],
                   )

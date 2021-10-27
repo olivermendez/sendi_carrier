@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sendi_carriers/pages/listing_detail_page.dart';
 import 'package:sendi_carriers/pages/welcome_login_register/login_page.dart';
 import 'package:sendi_carriers/pages/welcome_login_register/register_page.dart';
 import 'package:sendi_carriers/pages/welcome_login_register/welcome_screen.dart';
@@ -15,6 +16,8 @@ class AppRouter {
         return LoginPage.route();
       case RegisterPage.routenName:
         return RegisterPage.route();
+      case DetailPageListing.routenName:
+        return DetailPageListing.route();
 
       default:
         return _errorRoute();
