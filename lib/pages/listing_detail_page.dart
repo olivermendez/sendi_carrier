@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sendi_carriers/models/listing.dart';
 
 class DetailPageListing extends StatefulWidget {
-  DetailPageListing({Key? key}) : super(key: key);
+  final List<Listing> listings;
+
+  DetailPageListing({required this.listings});
 
   @override
   _DetailPageListingState createState() => _DetailPageListingState();
@@ -10,6 +13,10 @@ class DetailPageListing extends StatefulWidget {
 class _DetailPageListingState extends State<DetailPageListing> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(""),
+      ),
+    );
   }
 }

@@ -109,60 +109,64 @@ class _Listings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cardImage =
+        NetworkImage('https://source.unsplash.com/random/800x600?house');
     return ListView.builder(
         itemCount: _listings.length,
         itemBuilder: (context, index) {
           final listing = _listings[index];
-          return Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: SizedBox(
-              height: 210,
-              child: Card(
-                elevation: 4,
-                child: Column(
-                  children: [
-                    Text(
-                      listing.title,
-                      style: const TextStyle(fontWeight: FontWeight.w300),
+          return Card(
+              elevation: 10.0,
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(listing.title),
+                    subtitle: Text(listing.price.toString()),
+                    trailing: const Icon(Icons.favorite_outline),
+                  ),
+                  SizedBox(
+                    height: 100.0,
+                    child: Ink.image(
+                      image: cardImage,
+                      fit: BoxFit.cover,
                     ),
-                    SizedBox(),
-                    ListTile(
-                      title: Text(
-                        listing.title,
-                        style: const TextStyle(fontWeight: FontWeight.w300),
-                      ),
-                      subtitle: Text(
-                        listing.addressFrom,
-                        style: const TextStyle(fontSize: 15),
-                      ),
-                      leading: Icon(
-                        Icons.north_east,
-                        color: Colors.blue[500],
-                      ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10.0),
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: const Icon(Icons.north_east),
+                          subtitle: Text(
+                            listing.addressFrom,
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.south_east),
+                          subtitle: Text(
+                            listing.addressTo,
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ),
+                      ],
                     ),
-                    //const Divider(),
-                    ListTile(
-                      title: Text(
-                        listing.addressTo,
-                        style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  ButtonBar(
+                    children: [
+                      TextButton(
+                        child: const Text('CONTACT AGENT'),
+                        onPressed: () {/* ... */},
                       ),
-                      leading: Icon(
-                        Icons.south_east,
-                        color: Colors.blue[500],
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(listing.price.toString()),
-                      leading: Icon(
-                        Icons.price_change,
-                        color: Colors.blue[500],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+                      TextButton(
+                        child: const Text('LEARN MORE'),
+                        onPressed: () {/* ... */},
+                      )
+                    ],
+                  )
+                ],
+              ));
         });
   }
 }
