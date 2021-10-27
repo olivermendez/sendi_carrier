@@ -8,6 +8,7 @@ import 'package:sendi_carriers/pages/home_page.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:sendi_carriers/providers/listing_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,12 +26,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  //bool? _obscurePassword;
-  //bool? _autovalidate;
-  //TextEditingController? _emailController;
-  //TextEditingController? _passwordController;
-
   String? _email;
   String? _password;
   bool _rememberme = true;
@@ -40,9 +35,6 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     _passwordVisible = false;
     super.initState();
-    //_obscurePassword = true;
-    //_emailController = TextEditingController();
-    //_passwordController = TextEditingController();
   }
 
   @override
@@ -202,6 +194,10 @@ class _LoginPageState extends State<LoginPage> {
     var body = response.body;
     var decodedJson = jsonDecode(body);
     var token = Token.fromJson(decodedJson);
+
+    ListingProvider().getListing(token);
+
+    //ListingProvider().getListing(token);
 
     //print(token.token);
 

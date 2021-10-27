@@ -13,10 +13,10 @@ class ListingProvider extends ChangeNotifier {
 
   ListingProvider() {
     print("Listing Provider inicializado");
-    //this.onDisplayListing();
+    //this.getListing();
   }
 
-  getListing(Token token) async {
+  Future getListing(Token token) async {
     var response = await http.get(
       url,
       headers: {
@@ -28,8 +28,11 @@ class ListingProvider extends ChangeNotifier {
 
     final nowListingResponse = ListingResponse.fromJson(response.body);
 
-    print(nowListingResponse.results[0].title);
+    onDisplayListing = nowListingResponse.results;
+    return onDisplayListing = nowListingResponse.results;
 
-    notifyListeners();
+    //notifyListeners();
+
+    //redibujar la data si agrega mas data.
   }
 }

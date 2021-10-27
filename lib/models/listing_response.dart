@@ -22,10 +22,10 @@ class ListingResponse {
             List<Listing>.from(json["results"].map((x) => Listing.fromMap(x))),
       );
 
-  Map<String, dynamic> toMap() => {
-        "totalListing": totalListing,
-        "results": List<dynamic>.from(results.map((x) => x.toMap())),
-      };
+  //Map<String, dynamic> toMap() => {
+  //      "totalListing": totalListing,
+  //      "results": List<dynamic>.from(results.map((x) => x.toMap())),
+  //    };
 }
 
 class Contact {

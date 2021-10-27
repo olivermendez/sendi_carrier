@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/config/constant.dart';
+import 'package:sendi_carriers/models/listing.dart';
 import 'package:sendi_carriers/models/listing_response.dart';
+//import 'package:sendi_carriers/config/constant.dart';
+//import 'package:sendi_carriers/models/listing_response.dart';
 import 'package:sendi_carriers/models/token.dart';
 import 'package:sendi_carriers/pages/my_account_page.dart';
 import 'package:sendi_carriers/pages/payments_page.dart';
@@ -22,71 +25,52 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //final listingProvider = Provider.of<ListingProvider>(context);
-
-  @override
-  initState() {
-    super.initState();
-    _getListing();
-  }
-
   @override
   Widget build(BuildContext context) {
+    //final listingProvider = Provider.of<ListingProvider>(context, listen: true);
+
+    //print(listingProvider.onDisplayListing);
+
+    Future<ListingResponse?> getData() async {
+      var url = Uri.parse('${Constants.apiUrl}listings/');
+
+      var response = await http.get(
+        url,
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+          'authorization': "Bearer ${widget.token.token}"
+        },
+      );
+
+      final nowListingResponse = ListingResponse.fromJson(response.body);
+
+      return nowListingResponse;
+
+      //print(nowListingResponse.results);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Find Shipments"),
       ),
-      body: Center(
-        child: Text("Hola ${widget.token.user.name}!"),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            MyHeaderDrawer(
-              token: widget.token,
-            ),
-            myDrawerListOption(),
-          ],
-        ),
+      body: FutureBuilder(
+        future: getData(),
+        builder: (context, AsyncSnapshot<ListingResponse?> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: Text("no data"),
+            );
+          } else {
+            print(snapshot.data!.results);
+            return _Listings(snapshot.data!.results);
+          }
+        },
       ),
     );
   }
 
-  void _getListing() async {
-    ListingProvider().getListing(widget.token);
-  }
-
-  //void _getListing() async {
-  //  var url = Uri.parse('${Constants.apiUrl}listings/');
-
-  //  var response = await http.get(
-  //    url,
-  //    headers: {
-  //      'content-type': 'application/json',
-  //      'accept': 'application/json',
-  //      'authorization': "Bearer ${widget.token.token}"
-  //    },
-  //  );
-
-  //  final nowListingResponse = ListingResponse.fromJson(response.body);
-
-  //  print(nowListingResponse.results[0].title);
-  //}
-
-  //Widget _getContent() {
-  //return _listing.length == 0 ? _noContent() : _getListViewListing();
-  //}
-
-  Widget _noContent() {
-    return Center(
-      child: Text("no content"),
-    );
-  }
-
-  Widget _getListViewListing() {
-    return Container();
-  }
+  //
 
   Widget myDrawerListOption() {
     return Column(
@@ -128,5 +112,23 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
+  }
+}
+
+class _Listings extends StatelessWidget {
+  final List<Listing> _listings;
+
+  const _Listings(this._listings);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: _listings.length,
+        itemBuilder: (context, index) {
+          final listing = _listings[index];
+          return ListTile(
+            title: Text(listing.title),
+          );
+        });
   }
 }

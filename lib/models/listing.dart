@@ -6,7 +6,7 @@ import 'location.dart';
 
 class Listing {
   Listing({
-    required this.contact,
+    this.contact,
     required this.locationFrom,
     required this.locationTo,
     required this.comodity,
@@ -29,7 +29,7 @@ class Listing {
     required this.resultId,
   });
 
-  Contact contact;
+  Contact? contact;
   Location locationFrom;
   Location locationTo;
   String comodity;
@@ -53,7 +53,7 @@ class Listing {
 
   factory Listing.fromJson(String str) => Listing.fromMap(json.decode(str));
 
-  String toJson() => json.encode(toMap());
+  //String toJson() => json.encode(toMap());
 
   factory Listing.fromMap(Map<String, dynamic> json) => Listing(
         contact: Contact.fromMap(json["contact"]),
@@ -78,28 +78,4 @@ class Listing {
         v: json["__v"],
         resultId: json["id"],
       );
-
-  Map<String, dynamic> toMap() => {
-        "contact": contact.toMap(),
-        "locationFrom": locationFrom.toMap(),
-        "locationTo": locationTo.toMap(),
-        "comodity": comodity,
-        "_id": id,
-        "title": title,
-        "description": description,
-        "phone": phone,
-        "addressFrom": addressFrom,
-        "addressTo": addressTo,
-        "photo": photo,
-        "price": price,
-        "widthInMeters": widthInMeters,
-        "lengthInMeters": lengthInMeters,
-        "heightInMeters": heightInMeters,
-        "weightInGrams": weightInGrams,
-        "unitCount": unitCount,
-        "user": user,
-        "createdAt": createdAt.toIso8601String(),
-        "__v": v,
-        "id": resultId,
-      };
 }
