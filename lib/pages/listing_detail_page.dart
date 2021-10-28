@@ -28,13 +28,14 @@ class _DetailPageListingState extends State<DetailPageListing> {
           SliverList(
             delegate: SliverChildListDelegate([
               ListingTitle(listing),
-              PrimaryImageListing(
-                listing: listing,
-              ),
               ListingDetails(
                 listing: listing,
               ),
-              ButtonActionOnListing()
+              Divider(),
+              FromToDestination(
+                listing: listing,
+              ),
+              const ButtonActionOnListing()
             ]),
           )
         ],
@@ -44,17 +45,16 @@ class _DetailPageListingState extends State<DetailPageListing> {
 }
 
 class ListingTitle extends StatelessWidget {
-  //const ListingTitle({Key? key}) : super(key: key);
   final Listing listing;
 
   ListingTitle(this.listing, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(8.0),
       child: Text(
         listing.title,
-        style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
       ),
     );
   }
@@ -70,25 +70,23 @@ class _CustomAppBar extends StatelessWidget {
     // ignore: prefer_const_constructors
     return SliverAppBar(
       //backgroundColor: Colors.indigo,
-      expandedHeight: 50,
+      expandedHeight: 200,
       floating: false,
       pinned: true,
-      title: const Text(
-        "Listing Details",
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      ),
+      //title: const Text(
+      //  "Listing Details",
+      //  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      // s),
 
-      // ignore: prefer_const_constructors
-      //flexibleSpace: FlexibleSpaceBar(
-      //titlePadding: EdgeInsets.all(0),
-      //centerTitle: true,
-      //title: Text(listing.title),
-      //background: FadeInImage(
-      //  placeholder: const AssetImage('assets/loading.gif'),
-      //  image: NetworkImage(listing.photo),
-      //  fit: BoxFit.cover,
-      //),
-      //),
+      flexibleSpace: FlexibleSpaceBar(
+        titlePadding: const EdgeInsets.all(0),
+        centerTitle: true,
+        background: FadeInImage(
+          placeholder: const AssetImage('assets/loading.gif'),
+          image: NetworkImage(listing.photo),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }
@@ -125,17 +123,30 @@ class ListingDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 12.0),
+          child: Text(
+            "Listing Expires in 6d 23 h",
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 12, top: 10),
+          child: Text(
+            "Offer " + listing.price.toString(),
+            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+        ),
         const Divider(
           color: Colors.black,
         ),
-        Container(
-            child: ListTile(
-                title: const Text(
-                  "Listing Question ?",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                trailing: const Icon(Icons.question_answer, color: Colors.blue),
-                onTap: () {})),
+        ListTile(
+            title: const Text(
+              "Listing Question ?",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            trailing: const Icon(Icons.question_answer, color: Colors.blue),
+            onTap: () {}),
         const Divider(
           color: Colors.black,
         ),
@@ -185,6 +196,32 @@ class ButtonActionOnListing extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class FromToDestination extends StatelessWidget {
+  final Listing listing;
+  const FromToDestination({required this.listing, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(
+            "From: " + listing.addressFrom,
+          ),
+          trailing: const Icon(Icons.south_east, color: Colors.blue),
+        ),
+        ListTile(
+          title: Text(
+            "To " + listing.addressTo,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          trailing: const Icon(Icons.north_east, color: Colors.blue),
+        )
+      ],
     );
   }
 }
