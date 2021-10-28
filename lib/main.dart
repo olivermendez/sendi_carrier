@@ -5,10 +5,10 @@ import 'package:sendi_carriers/pages/listing_detail_page.dart';
 import 'package:sendi_carriers/pages/welcome_login_register/welcome_screen.dart';
 import 'package:sendi_carriers/providers/listing_provider.dart';
 
-void main() => runApp(AppState());
+void main() => runApp(const AppState());
 
 class AppState extends StatelessWidget {
-  //const AppState({Key? key}) : super(key: key);
+  const AppState({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +19,13 @@ class AppState extends StatelessWidget {
           lazy: false,
         ),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     );
   }
 }
 
 class MyApp extends StatelessWidget {
-  //const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       initialRoute: WelcomeScreen.routeName,
       routes: {
         'welcome': (_) => const WelcomeScreen(),
-        'detail': (_) => DetailPageListing()
+        'detail': (_) => const DetailPageListing()
       },
     );
   }

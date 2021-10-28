@@ -42,7 +42,28 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Find Shipments"),
+        title: const Text(
+          "Find Shipments",
+          style: TextStyle(fontSize: 20),
+        ),
+        //ackgroundColor: Colors.deepPurple[300],
+        elevation: 9,
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.menu),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            MyAccountPage(token: widget.token)));
+                print(widget.token.token);
+              },
+              icon: const Icon(Icons.person))
+        ],
       ),
       body: FutureBuilder(
         future: getData(),
@@ -171,5 +192,15 @@ class _Listings extends StatelessWidget {
                 ],
               ));
         });
+  }
+}
+
+class CardsListing extends StatelessWidget {
+  final Listing listing;
+  CardsListing({required this.listing});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
