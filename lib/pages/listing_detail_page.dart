@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/models/listing.dart';
+import 'package:sendi_carriers/pages/accept_listing_page.dart';
 
 class DetailPageListing extends StatefulWidget {
   const DetailPageListing({Key? key}) : super(key: key);
@@ -31,11 +32,13 @@ class _DetailPageListingState extends State<DetailPageListing> {
               ListingDetails(
                 listing: listing,
               ),
-              Divider(),
+              const Divider(),
               FromToDestination(
                 listing: listing,
               ),
-              const ButtonActionOnListing()
+              ButtonActionOnListing(
+                listing: listing,
+              )
             ]),
           )
         ],
@@ -67,7 +70,6 @@ class _CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
     return SliverAppBar(
       //backgroundColor: Colors.indigo,
       expandedHeight: 200,
@@ -179,7 +181,9 @@ class ListingDetails extends StatelessWidget {
 }
 
 class ButtonActionOnListing extends StatelessWidget {
-  const ButtonActionOnListing({Key? key}) : super(key: key);
+  final Listing listing;
+  const ButtonActionOnListing({required this.listing, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +193,12 @@ class ButtonActionOnListing extends StatelessWidget {
         minWidth: double.infinity,
         child: MaterialButton(
           color: Colors.blue[900],
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AcceptListingPage(listing: listing)));
+          },
           child: const Text(
             'Accept Listing',
             style: TextStyle(color: Colors.white),
