@@ -7,6 +7,7 @@ import 'package:sendi_carriers/pages/my_account_page.dart';
 import 'package:sendi_carriers/pages/payments_page.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:sendi_carriers/pages/test.dart';
 
 class HomePage extends StatefulWidget {
   final Token token;
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 9,
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.menu),
         ),
         actions: [
           IconButton(
@@ -136,61 +137,67 @@ class _Listings extends StatelessWidget {
           final listing = _listings[index];
 
           //var cardImage
-          return Card(
-              elevation: 10.0,
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text(listing.title),
-                    subtitle: Text(listing.price.toString()),
-                    trailing: const Icon(Icons.favorite_outline),
-                  ),
-                  SizedBox(
-                    height: 100.0,
-                    child: Ink.image(
-                      image: NetworkImage(listing.photo),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(10.0),
-                    alignment: Alignment.centerLeft,
+          return Center(
+            child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Card(
+                  elevation: 0.6,
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'detail',
+                          arguments: _listings[index]);
+                    },
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ListTile(
-                          leading: const Icon(Icons.north_east),
-                          subtitle: Text(
-                            listing.addressFrom,
-                            style: const TextStyle(fontSize: 14),
-                          ),
+                        Stack(
+                          alignment: Alignment.bottomLeft,
+                          children: [
+                            Image.network(
+                              listing.photo,
+                              fit: BoxFit.fitWidth,
+                              width: MediaQuery.of(context).size.width,
+                              height: 200,
+                            ),
+                            /*
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(listing.title,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
+                            )
+                            */
+                          ],
                         ),
-                        ListTile(
-                          leading: const Icon(Icons.south_east),
-                          subtitle: Text(
-                            listing.addressTo,
-                            style: const TextStyle(fontSize: 14),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 16, top: 16, right: 16, bottom: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                listing.title,
+                                style: TextStyle(color: Colors.black54),
+                              ),
+                              Text(
+                                listing.addressFrom,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                              Text(listing.addressTo,
+                                  style: const TextStyle(fontSize: 13))
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                  ButtonBar(
-                    children: [
-                      TextButton(
-                        child: const Text('CONTACT AGENT'),
-                        onPressed: () {/* ... */},
-                      ),
-                      TextButton(
-                        child: const Text('LEARN MORE'),
-                        onPressed: () {
-                          Navigator.pushNamed(context, 'detail',
-                              arguments: _listings[index]);
-                        },
-                      )
-                    ],
-                  )
-                ],
-              ));
+                )),
+          );
         });
   }
 }
