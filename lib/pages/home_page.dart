@@ -20,10 +20,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    //final listingProvider = Provider.of<ListingProvider>(context, listen: true);
-
-    //print(listingProvider.onDisplayListing);
-
     Future<ListingResponse?> getData() async {
       var url = Uri.parse('${Constants.apiUrl}listings/');
 
@@ -36,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         },
       );
 
-      final nowListingResponse = ListingResponse.fromJson(response.body);
+      final nowListingResponse = ListingResponse.fromRawJson(response.body);
 
       return nowListingResponse;
     }
@@ -72,7 +68,7 @@ class _HomePageState extends State<HomePage> {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           } else {
-            return _Listings(snapshot.data!.results);
+            return _Listings(snapshot.data!.listing);
           }
         },
       ),
@@ -185,10 +181,10 @@ class _Listings extends StatelessWidget {
                                 style: TextStyle(color: Colors.black54),
                               ),
                               Text(
-                                listing.addressFrom,
+                                listing.title,
                                 style: const TextStyle(fontSize: 13),
                               ),
-                              Text(listing.addressTo,
+                              Text(listing.user,
                                   style: const TextStyle(fontSize: 13))
                             ],
                           ),

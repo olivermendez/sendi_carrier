@@ -1,105 +1,65 @@
 import 'dart:convert';
 
-import 'package:sendi_carriers/models/listing_response.dart';
-
-import 'location.dart';
-
 class Listing {
   Listing({
-    this.contact,
-    required this.locationFrom,
-    required this.locationTo,
-    required this.comodity,
     required this.id,
+    required this.status,
     required this.title,
     required this.description,
-    required this.phone,
-    required this.addressFrom,
-    required this.addressTo,
+    required this.quantity,
     required this.photo,
-    required this.price,
-    required this.widthInMeters,
-    required this.lengthInMeters,
-    required this.heightInMeters,
-    required this.weightInGrams,
-    required this.unitCount,
+    required this.comodity,
+    required this.subcomodity,
     required this.user,
     required this.createdAt,
     required this.v,
-    required this.resultId,
+    required this.listingId,
   });
 
-  Contact? contact;
-  Location locationFrom;
-  Location locationTo;
-  String comodity;
   String id;
+  String status;
   String title;
   String description;
-  String phone;
-  String addressFrom;
-  String addressTo;
+  String quantity;
   String photo;
-  int price;
-  double widthInMeters;
-  double lengthInMeters;
-  double heightInMeters;
-  int weightInGrams;
-  int unitCount;
+  String comodity;
+  String subcomodity;
   String user;
   DateTime createdAt;
   int v;
-  String resultId;
+  String listingId;
 
-  factory Listing.fromJson(String str) => Listing.fromMap(json.decode(str));
+  factory Listing.fromRawJson(String str) => Listing.fromJson(json.decode(str));
 
-  //String toJson() => json.encode(toMap());
+  String toRawJson() => json.encode(toJson());
 
-  factory Listing.fromMap(Map<String, dynamic> json) => Listing(
-        contact: Contact.fromMap(json["contact"]),
-        locationFrom: Location.fromMap(json["locationFrom"]),
-        locationTo: Location.fromMap(json["locationTo"]),
-        comodity: json["comodity"],
+  factory Listing.fromJson(Map<String, dynamic> json) => Listing(
         id: json["_id"],
+        status: json["status"],
         title: json["title"],
         description: json["description"],
-        phone: json["phone"],
-        addressFrom: json["addressFrom"],
-        addressTo: json["addressTo"],
+        quantity: json["quantity"],
         photo: json["photo"],
-        price: json["price"],
-        widthInMeters: json["widthInMeters"].toDouble(),
-        lengthInMeters: json["lengthInMeters"].toDouble(),
-        heightInMeters: json["heightInMeters"].toDouble(),
-        weightInGrams: json["weightInGrams"],
-        unitCount: json["unitCount"],
+        comodity: json["comodity"],
+        subcomodity: json["subcomodity"],
         user: json["user"],
         createdAt: DateTime.parse(json["createdAt"]),
         v: json["__v"],
-        resultId: json["id"],
+        listingId: json["id"],
       );
 
   Map<String, dynamic> toJson() => {
-        "contact": contact!.toJson(),
-        "locationFrom": locationFrom.toJson(),
-        "locationTo": locationTo.toJson(),
-        "comodity": comodity,
         "_id": id,
+        "status": status,
         "title": title,
         "description": description,
-        "phone": phone,
-        "addressFrom": addressFrom,
-        "addressTo": addressTo,
+        "quantity": quantity,
         "photo": photo,
-        "price": price,
-        "widthInMeters": widthInMeters,
-        "lengthInMeters": lengthInMeters,
-        "heightInMeters": heightInMeters,
-        "weightInGrams": weightInGrams,
-        "unitCount": unitCount,
+        "comodity": comodity,
+        "subcomodity": subcomodity,
         "user": user,
         "createdAt": createdAt.toIso8601String(),
         "__v": v,
-        "id": resultId,
+        "id": listingId,
       };
 }

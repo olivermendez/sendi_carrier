@@ -135,7 +135,7 @@ class ListingDetails extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 12, top: 10),
           child: Text(
-            "Offer " + listing.price.toString(),
+            "Offer ",
             style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
         ),
@@ -164,13 +164,13 @@ class ListingDetails extends StatelessWidget {
           padding: const EdgeInsets.only(left: 15.0),
           child: Column(
             children: [
-              Text("Height: " + listing.heightInMeters.toString() + "M"),
-              Text("Length: " + listing.lengthInMeters.toString() + "M"),
+              Text("Height: M"),
+              Text("Length: M"),
               Text(
-                "Weigh:" + listing.weightInGrams.toString() + " Grams",
+                "Weigh: Grams",
               ),
               Text(
-                "Width:   " + listing.widthInMeters.toString() + "M",
+                "Width:  M",
               ),
             ],
           ),
@@ -219,13 +219,13 @@ class FromToDestination extends StatelessWidget {
       children: <Widget>[
         ListTile(
           title: Text(
-            "From: " + listing.addressFrom,
+            "From: ",
           ),
           trailing: const Icon(Icons.south_east, color: Colors.blue),
         ),
         ListTile(
           title: Text(
-            "To " + listing.addressTo,
+            "To ",
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           trailing: const Icon(Icons.north_east, color: Colors.blue),

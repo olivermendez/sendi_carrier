@@ -26,10 +26,10 @@ class ListingProvider extends ChangeNotifier {
       },
     );
 
-    final nowListingResponse = ListingResponse.fromJson(response.body);
+    final nowListingResponse = ListingResponse.fromRawJson(response.body);
 
-    onDisplayListing = nowListingResponse.results;
-    return onDisplayListing = nowListingResponse.results;
+    onDisplayListing = nowListingResponse.listing;
+    return onDisplayListing = nowListingResponse.listing;
 
     //notifyListeners();
 
