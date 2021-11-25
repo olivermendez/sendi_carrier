@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sendi_carriers/pages/profile.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -139,6 +140,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     //My profile
                     InkWell(
                       onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Profile()));
+
                         /* Navigator.pop(context);
                         Navigator.of(context).push(_profileScreenRoute()); */
                       },
