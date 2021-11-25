@@ -6,11 +6,6 @@ class DetailPageListing extends StatefulWidget {
   const DetailPageListing({Key? key}) : super(key: key);
 
   static const String routenName = 'detail';
-  static Route route() {
-    return MaterialPageRoute(
-        builder: (_) => const DetailPageListing(),
-        settings: const RouteSettings(name: routenName));
-  }
 
   @override
   _DetailPageListingState createState() => _DetailPageListingState();
@@ -142,35 +137,188 @@ class ListingDetails extends StatelessWidget {
         const Divider(
           color: Colors.black,
         ),
-        ListTile(
-            title: const Text(
-              "Listing Question ?",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            trailing: const Icon(Icons.question_answer, color: Colors.blue),
-            onTap: () {}),
-        const Divider(
-          color: Colors.black,
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 15.0),
-          child: Text(
-            "Listing Details",
-            style: TextStyle(fontWeight: FontWeight.bold),
-            textAlign: TextAlign.start,
-          ),
-        ),
         Padding(
           padding: const EdgeInsets.only(left: 15.0),
-          child: Column(
-            children: [
-              Text("Height: M"),
-              Text("Length: M"),
-              Text(
-                "Weigh: Grams",
+          child: Column(children: [
+            Container(
+              height: 30,
+              child: Stack(
+                children: [
+                  const Positioned(
+                    left: 0,
+                    bottom: 0,
+                    child: Text(
+                      "Pickup information",
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    bottom: -4,
+                    child: InkWell(
+                      onTap: () {
+                        //_launchMapsUrl(_originPlaceId, _destinationPlaceId);
+                      },
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        child: const Text(
+                          "Map it",
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                "Width:  M",
+            ),
+            Row(
+              children: [
+                Text(
+                  "John Doe",
+                  style: TextStyle(
+                    color: Color(0xFF787878),
+                    fontSize: 12,
+                    fontFamily: 'medium',
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  "+1 347-272-0544",
+                  style: TextStyle(
+                    color: Color(0xFF787878),
+                    fontSize: 12,
+                    fontFamily: 'medium',
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Container(
+                  child: Text(
+                    "john@gmail.com",
+                    style: TextStyle(
+                      color: Color(0xFF787878),
+                      fontSize: 12,
+                      fontFamily: 'medium',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Container(
+                  child: Text(
+                    "50 Bayard St, New York, NY 10013, United States",
+                    style: TextStyle(
+                      color: Color(0xFF787878),
+                      fontSize: 12,
+                      fontFamily: 'medium',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 6,
+            ),
+          ]),
+        ),
+        Container(
+          padding: const EdgeInsets.only(left: 20, right: 13),
+          height: 135,
+          decoration: const BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(width: 1, color: Color(0xFFEDEDED)))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              //1st Row
+              SizedBox(
+                height: 30,
+                child: Stack(
+                  children: const [
+                    Positioned(
+                      left: 0,
+                      bottom: 0,
+                      child: Text(
+                        "Delivery information",
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              //2nd Row
+              Row(
+                children: [
+                  Text(
+                    "Sarah Joseph",
+                    style: TextStyle(
+                      color: Color(0xFF787878),
+                      fontSize: 12,
+                      fontFamily: 'medium',
+                    ),
+                  ),
+                ],
+              ),
+              //3rd Row
+              Container(
+                child: Row(
+                  children: [
+                    Container(
+                      child: Text(
+                        "+1 321-212-0544",
+                        style: TextStyle(
+                          color: Color(0xFF787878),
+                          fontSize: 12,
+                          fontFamily: 'medium',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              //4th Row
+              Row(
+                children: [
+                  Text(
+                    "sarah@gmail.com",
+                    style: TextStyle(
+                      color: Color(0xFF787878),
+                      fontSize: 12,
+                      fontFamily: 'medium',
+                    ),
+                  ),
+                ],
+              ),
+              //5th Row
+              Row(
+                children: [
+                  Text(
+                    "261 Broadway, New York, NY 10007, United States",
+                    style: TextStyle(
+                      color: Color(0xFF787878),
+                      fontSize: 12,
+                      fontFamily: 'medium',
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 6,
               ),
             ],
           ),
