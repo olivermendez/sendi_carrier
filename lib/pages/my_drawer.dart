@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sendi_carriers/pages/manage_vehicle.dart';
 import 'package:sendi_carriers/pages/profile.dart';
 
 import 'my_documents.dart';
@@ -179,6 +180,10 @@ class _MyDrawerState extends State<MyDrawer> {
                     //Manage Vehicle
                     InkWell(
                       onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ManageVehicle()));
                         /* Navigator.pop(context);
                         Navigator.of(context).push(_manageVehicleScreenRoute()); */
                       },

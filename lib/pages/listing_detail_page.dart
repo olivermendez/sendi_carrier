@@ -63,29 +63,6 @@ class _CustomAppBar extends StatelessWidget {
   }
 }
 
-class PrimaryImageListing extends StatelessWidget {
-  final Listing listing;
-  const PrimaryImageListing({required this.listing, Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        height: 200,
-        width: 400,
-        margin: const EdgeInsets.all(10),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(0),
-          child: FadeInImage(
-            placeholder: const AssetImage('assets/loading.gif'),
-            //image: NetworkImage('https://via.placeholder.com/300x200'),
-            image: NetworkImage(listing.photo),
-            fit: BoxFit.cover,
-          ),
-        ));
-  }
-}
-
 class ListingDetails extends StatelessWidget {
   final Listing listing;
   const ListingDetails({required this.listing, Key? key}) : super(key: key);
