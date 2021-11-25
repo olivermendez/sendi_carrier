@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/pages/profile.dart';
 
+import 'documents.dart';
+
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
 
@@ -142,9 +144,6 @@ class _MyDrawerState extends State<MyDrawer> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Profile()));
-
-                        /* Navigator.pop(context);
-                        Navigator.of(context).push(_profileScreenRoute()); */
                       },
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
@@ -217,8 +216,10 @@ class _MyDrawerState extends State<MyDrawer> {
                     //Documents
                     InkWell(
                       onTap: () {
-                        /* Navigator.pop(context);
-                        Navigator.of(context).push(_documentsScreenRoute()); */
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyDocuments()));
                       },
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
