@@ -117,12 +117,12 @@ class ListingDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 12.0),
-          child: Text(
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
             "Listing Expires in 6d 23 h",
             style: TextStyle(
               fontSize: 13,
@@ -130,18 +130,12 @@ class ListingDetails extends StatelessWidget {
               color: Color(0xFF787878),
             ),
           ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 12, top: 10),
-          child: Text(
+          Text(
             "Total Amount: \$545 ",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-        ),
-        const Divider(),
-        Padding(
-          padding: const EdgeInsets.only(left: 15.0),
-          child: Column(children: [
+          const Divider(),
+          Column(children: [
             SizedBox(
               height: 30,
               child: Stack(
@@ -210,15 +204,7 @@ class ListingDetails extends StatelessWidget {
               height: 6,
             ),
           ]),
-        ),
-        Container(
-          padding: const EdgeInsets.only(left: 20, right: 13),
-          height: 135,
-          decoration: const BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(width: 1, color: Color(0xFFEDEDED)))),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Column(
             children: [
               //1st Row
               SizedBox(
@@ -295,8 +281,8 @@ class ListingDetails extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
