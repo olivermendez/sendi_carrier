@@ -12,7 +12,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   bool isOnline = false;
   void toggle() {
     setState(() {
@@ -23,7 +23,6 @@ class _ProfileState extends State<Profile> {
   final ImagePicker _picker = ImagePicker();
   File? _imageFile;
   Future<File?> openGallery() async {
-    // ignore: deprecated_member_use
     File picture = (await _picker.pickImage(
         source: ImageSource.gallery, imageQuality: 50)) as File;
     setState(() {

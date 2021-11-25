@@ -6,7 +6,9 @@ import 'package:sendi_carriers/models/token.dart';
 import 'package:sendi_carriers/pages/my_account_page.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:sendi_carriers/pages/my_drawer.dart';
+import 'package:sendi_carriers/widgets/earnings.dart';
+import 'package:sendi_carriers/widgets/my_drawer.dart';
+import 'package:sendi_carriers/widgets/order_completed.dart';
 
 class HomePage extends StatefulWidget {
   final Token token;
@@ -56,7 +58,7 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.person))
         ],
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: FutureBuilder(
         future: getData(),
         builder: (context, AsyncSnapshot<ListingResponse?> snapshot) {
@@ -78,64 +80,96 @@ class _Listings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: _listings.length,
-        itemBuilder: (context, index) {
-          final listing = _listings[index];
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        //mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          //Total Earning & Completed Orders
+          totalEarningNCompletedOrders(context),
+          const Divider(),
+          //Recent Orders
+          const Padding(
+            padding: EdgeInsets.only(left: 18.0),
+            child: Text(
+              "Listing available",
+              style: TextStyle(
+                  color: Color(0xFF000000),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
 
-          //var cardImage
-          return Center(
-            child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Card(
-                  elevation: 0.6,
-                  clipBehavior: Clip.antiAlias,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, 'detail',
-                          arguments: _listings[index]);
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Stack(
-                          alignment: Alignment.bottomLeft,
+          SizedBox(
+            height: 500,
+            child: ListView.builder(
+                itemCount: _listings.length,
+                itemBuilder: (context, index) {
+                  final listing = _listings[index];
+
+                  //var cardImage
+                  return Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                    child: Card(
+                      color: Colors.blue[50],
+                      elevation: 0.6,
+                      clipBehavior: Clip.antiAlias,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'detail',
+                              arguments: _listings[index]);
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Image.network(
-                              listing.photo,
-                              fit: BoxFit.fitWidth,
-                              width: MediaQuery.of(context).size.width,
-                              height: 200,
+                            /* Stack(
+                              alignment: Alignment.bottomLeft,
+                              children: [
+                                Image.network(
+                                  listing.photo,
+                                  fit: BoxFit.fitWidth,
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 100,
+                                ),
+                              ],
+                            ), */
+
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 16, top: 16, right: 16, bottom: 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    listing.title,
+                                    style: const TextStyle(
+                                        color: Colors.black, fontSize: 17),
+                                  ),
+                                  Text(
+                                    listing.comodity,
+                                    style: const TextStyle(
+                                        fontSize: 13, color: Colors.black45),
+                                  ),
+                                  Text(listing.createdAt.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 13, color: Colors.black45))
+                                ],
+                              ),
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, top: 16, right: 16, bottom: 16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                listing.title,
-                                style: TextStyle(color: Colors.black54),
-                              ),
-                              Text(
-                                listing.title,
-                                style: const TextStyle(fontSize: 13),
-                              ),
-                              Text(listing.user,
-                                  style: const TextStyle(fontSize: 13))
-                            ],
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                )),
-          );
-        });
+                  );
+                }),
+          ),
+        ],
+      ),
+    );
   }
 }
