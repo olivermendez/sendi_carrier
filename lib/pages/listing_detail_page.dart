@@ -26,10 +26,6 @@ class _DetailPageListingState extends State<DetailPageListing> {
               ListingDetails(
                 listing: listing,
               ),
-              const Divider(),
-              FromToDestination(
-                listing: listing,
-              ),
               ButtonActionOnListing(
                 listing: listing,
               )
@@ -187,80 +183,91 @@ class ListingDetails extends StatelessWidget {
               height: 6,
             ),
           ]),
-          Column(
-            children: [
-              //1st Row
-              SizedBox(
-                height: 30,
-                child: Stack(
-                  children: const [
-                    Positioned(
-                      left: 0,
-                      bottom: 0,
-                      child: Text(
-                        "Delivery information",
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                  ],
+          Divider(),
+          Text(
+            "Delivery information",
+            style: TextStyle(
+              fontSize: 14,
+            ),
+          ),
+          //2nd Row
+          Row(
+            children: const [
+              Text(
+                "Sarah Joseph",
+                style: TextStyle(
+                  color: Color(0xFF787878),
+                  fontSize: 12,
+                  fontFamily: 'medium',
                 ),
               ),
-              //2nd Row
-              Row(
-                children: const [
-                  Text(
-                    "Sarah Joseph",
-                    style: TextStyle(
-                      color: Color(0xFF787878),
-                      fontSize: 12,
-                      fontFamily: 'medium',
-                    ),
-                  ),
-                ],
+            ],
+          ),
+          //3rd Row
+          Row(
+            children: const [
+              Text(
+                "+1 321-212-0544",
+                style: TextStyle(
+                  color: Color(0xFF787878),
+                  fontSize: 12,
+                  fontFamily: 'medium',
+                ),
               ),
-              //3rd Row
-              Row(
-                children: const [
-                  Text(
-                    "+1 321-212-0544",
-                    style: TextStyle(
-                      color: Color(0xFF787878),
-                      fontSize: 12,
-                      fontFamily: 'medium',
-                    ),
-                  ),
-                ],
+            ],
+          ),
+          //4th Row
+          Row(
+            children: const [
+              Text(
+                "sarah@gmail.com",
+                style: TextStyle(
+                  color: Color(0xFF787878),
+                  fontSize: 12,
+                  fontFamily: 'medium',
+                ),
               ),
-              //4th Row
-              Row(
-                children: const [
-                  Text(
-                    "sarah@gmail.com",
-                    style: TextStyle(
-                      color: Color(0xFF787878),
-                      fontSize: 12,
-                      fontFamily: 'medium',
-                    ),
-                  ),
-                ],
+            ],
+          ),
+          //5th Row
+          Row(
+            children: const [
+              Text(
+                "261 Broadway, New York, NY 10007, United States",
+                style: TextStyle(
+                  color: Color(0xFF787878),
+                  fontSize: 12,
+                  fontFamily: 'medium',
+                ),
               ),
-              //5th Row
-              Row(
-                children: const [
-                  Text(
-                    "261 Broadway, New York, NY 10007, United States",
-                    style: TextStyle(
-                      color: Color(0xFF787878),
-                      fontSize: 12,
-                      fontFamily: 'medium',
-                    ),
-                  ),
-                ],
+            ],
+          ),
+          const SizedBox(
+            height: 6,
+          ),
+          Divider(),
+          Row(
+            children: const [
+              Text(
+                "Item details",
+                style: TextStyle(
+                  color: Color(0xFF000000),
+                  fontSize: 14,
+                ),
               ),
-              const SizedBox(
-                height: 6,
+            ],
+          ),
+          //2nd Row
+          Row(
+            children: const [
+              Text(
+                "Lorem ipsum dolor sit amet, consectetur\n"
+                "tempor incididunt ut     ...more",
+                style: TextStyle(
+                  color: Color(0xFF787878),
+                  fontSize: 12,
+                  height: 2,
+                ),
               ),
             ],
           ),
@@ -295,32 +302,6 @@ class ButtonActionOnListing extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class FromToDestination extends StatelessWidget {
-  final Listing listing;
-  const FromToDestination({required this.listing, Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          title: Text(
-            "From: ",
-          ),
-          trailing: const Icon(Icons.south_east, color: Colors.blue),
-        ),
-        ListTile(
-          title: Text(
-            "To ",
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          trailing: const Icon(Icons.north_east, color: Colors.blue),
-        )
-      ],
     );
   }
 }
