@@ -124,27 +124,29 @@ class ListingDetails extends StatelessWidget {
           padding: EdgeInsets.only(left: 12.0),
           child: Text(
             "Listing Expires in 6d 23 h",
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF787878),
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 12, top: 10),
+        const Padding(
+          padding: EdgeInsets.only(left: 12, top: 10),
           child: Text(
-            "Offer ",
-            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            "Total Amount: \$545 ",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
-        const Divider(
-          color: Colors.black,
-        ),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.only(left: 15.0),
           child: Column(children: [
-            Container(
+            SizedBox(
               height: 30,
               child: Stack(
-                children: [
-                  const Positioned(
+                children: const [
+                  Positioned(
                     left: 0,
                     bottom: 0,
                     child: Text(
@@ -154,43 +156,22 @@ class ListingDetails extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    right: 0,
-                    bottom: -4,
-                    child: InkWell(
-                      onTap: () {
-                        //_launchMapsUrl(_originPlaceId, _destinationPlaceId);
-                      },
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        child: const Text(
-                          "Map it",
-                          style: TextStyle(
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
             Row(
-              children: [
+              children: const [
                 Text(
                   "John Doe",
                   style: TextStyle(
                     color: Color(0xFF787878),
                     fontSize: 12,
-                    fontFamily: 'medium',
                   ),
                 ),
               ],
             ),
             Row(
-              children: [
+              children: const [
                 Text(
                   "+1 347-272-0544",
                   style: TextStyle(
@@ -202,29 +183,25 @@ class ListingDetails extends StatelessWidget {
               ],
             ),
             Row(
-              children: [
-                Container(
-                  child: Text(
-                    "john@gmail.com",
-                    style: TextStyle(
-                      color: Color(0xFF787878),
-                      fontSize: 12,
-                      fontFamily: 'medium',
-                    ),
+              children: const [
+                Text(
+                  "john@gmail.com",
+                  style: TextStyle(
+                    color: Color(0xFF787878),
+                    fontSize: 12,
+                    fontFamily: 'medium',
                   ),
                 ),
               ],
             ),
             Row(
-              children: [
-                Container(
-                  child: Text(
-                    "50 Bayard St, New York, NY 10013, United States",
-                    style: TextStyle(
-                      color: Color(0xFF787878),
-                      fontSize: 12,
-                      fontFamily: 'medium',
-                    ),
+              children: const [
+                Text(
+                  "50 Bayard St, New York, NY 10013, United States",
+                  style: TextStyle(
+                    color: Color(0xFF787878),
+                    fontSize: 12,
+                    fontFamily: 'medium',
                   ),
                 ),
               ],
@@ -263,7 +240,7 @@ class ListingDetails extends StatelessWidget {
               ),
               //2nd Row
               Row(
-                children: [
+                children: const [
                   Text(
                     "Sarah Joseph",
                     style: TextStyle(
@@ -275,25 +252,21 @@ class ListingDetails extends StatelessWidget {
                 ],
               ),
               //3rd Row
-              Container(
-                child: Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        "+1 321-212-0544",
-                        style: TextStyle(
-                          color: Color(0xFF787878),
-                          fontSize: 12,
-                          fontFamily: 'medium',
-                        ),
-                      ),
+              Row(
+                children: const [
+                  Text(
+                    "+1 321-212-0544",
+                    style: TextStyle(
+                      color: Color(0xFF787878),
+                      fontSize: 12,
+                      fontFamily: 'medium',
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               //4th Row
               Row(
-                children: [
+                children: const [
                   Text(
                     "sarah@gmail.com",
                     style: TextStyle(
@@ -306,7 +279,7 @@ class ListingDetails extends StatelessWidget {
               ),
               //5th Row
               Row(
-                children: [
+                children: const [
                   Text(
                     "261 Broadway, New York, NY 10007, United States",
                     style: TextStyle(
@@ -317,7 +290,7 @@ class ListingDetails extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 6,
               ),
             ],
