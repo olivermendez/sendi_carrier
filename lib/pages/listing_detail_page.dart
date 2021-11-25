@@ -23,7 +23,6 @@ class _DetailPageListingState extends State<DetailPageListing> {
           _CustomAppBar(listing),
           SliverList(
             delegate: SliverChildListDelegate([
-              ListingTitle(listing),
               ListingDetails(
                 listing: listing,
               ),
@@ -42,22 +41,6 @@ class _DetailPageListingState extends State<DetailPageListing> {
   }
 }
 
-class ListingTitle extends StatelessWidget {
-  final Listing listing;
-
-  ListingTitle(this.listing, {Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        listing.title,
-        style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-      ),
-    );
-  }
-}
-
 class _CustomAppBar extends StatelessWidget {
   final Listing listing;
 
@@ -70,10 +53,6 @@ class _CustomAppBar extends StatelessWidget {
       expandedHeight: 200,
       floating: false,
       pinned: true,
-      //title: const Text(
-      //  "Listing Details",
-      //  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      // s),
 
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: const EdgeInsets.all(0),
@@ -123,16 +102,20 @@ class ListingDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
+            listing.title,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          ),
+          const Text(
             "Listing Expires in 6d 23 h",
             style: TextStyle(
-              fontSize: 13,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
               color: Color(0xFF787878),
             ),
           ),
-          Text(
+          const Text(
             "Total Amount: \$545 ",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const Divider(),
           Column(children: [
