@@ -4,10 +4,9 @@ import 'package:sendi_carriers/models/listing.dart';
 import 'package:sendi_carriers/models/listing_response.dart';
 import 'package:sendi_carriers/models/token.dart';
 import 'package:sendi_carriers/pages/my_account_page.dart';
-import 'package:sendi_carriers/pages/payments_page.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:sendi_carriers/pages/test.dart';
+import 'package:sendi_carriers/pages/my_drawer.dart';
 
 class HomePage extends StatefulWidget {
   final Token token;
@@ -43,12 +42,7 @@ class _HomePageState extends State<HomePage> {
           "Find Shipments",
           style: TextStyle(fontSize: 20),
         ),
-        //ackgroundColor: Colors.deepPurple[300],
         elevation: 9,
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.menu),
-        ),
         actions: [
           IconButton(
               onPressed: () {
@@ -62,6 +56,7 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(Icons.person))
         ],
       ),
+      drawer: MyDrawer(),
       body: FutureBuilder(
         future: getData(),
         builder: (context, AsyncSnapshot<ListingResponse?> snapshot) {
@@ -72,50 +67,6 @@ class _HomePageState extends State<HomePage> {
           }
         },
       ),
-    );
-  }
-
-  //
-
-  Widget myDrawerListOption() {
-    return Column(
-      children: [
-        ListTile(
-          title: const Text('Your Trips'),
-          onTap: () {
-            // Update the state of the app.
-            // ...
-          },
-        ),
-        ListTile(
-          title: const Text('My Account'),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => MyAccountPage(
-                          token: widget.token,
-                        )));
-          },
-        ),
-        ListTile(
-          title: const Text('Payments'),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => PaymentPage(
-                          token: widget.token,
-                        )));
-          },
-        ),
-        ListTile(
-          title: const Text('Lo Out'),
-          onTap: () {
-            Navigator.pushReplacementNamed(context, '/login');
-          },
-        ),
-      ],
     );
   }
 }
@@ -159,15 +110,6 @@ class _Listings extends StatelessWidget {
                               width: MediaQuery.of(context).size.width,
                               height: 200,
                             ),
-                            /*
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Text(listing.title,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white)),
-                            )
-                            */
                           ],
                         ),
                         Padding(
@@ -195,15 +137,5 @@ class _Listings extends StatelessWidget {
                 )),
           );
         });
-  }
-}
-
-class CardsListing extends StatelessWidget {
-  final Listing listing;
-  CardsListing({required this.listing});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
