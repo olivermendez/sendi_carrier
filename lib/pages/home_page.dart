@@ -8,7 +8,6 @@ import 'package:sendi_carriers/pages/my_account_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:sendi_carriers/widgets/earnings.dart';
 import 'package:sendi_carriers/widgets/my_drawer.dart';
-import 'package:sendi_carriers/widgets/order_completed.dart';
 
 class HomePage extends StatefulWidget {
   final Token token;
@@ -44,21 +43,9 @@ class _HomePageState extends State<HomePage> {
           "Find Shipments",
           style: TextStyle(fontSize: 20),
         ),
-        elevation: 9,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            MyAccountPage(token: widget.token)));
-                print(widget.token.token);
-              },
-              icon: const Icon(Icons.person))
-        ],
+        elevation: 3,
       ),
-      drawer: const MyDrawer(),
+      drawer: MyDrawer(token: widget.token),
       body: FutureBuilder(
         future: getData(),
         builder: (context, AsyncSnapshot<ListingResponse?> snapshot) {
@@ -84,12 +71,11 @@ class _Listings extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        //mainAxisAlignment: MainAxisAlignment.start,
         children: [
           //Total Earning & Completed Orders
           totalEarningNCompletedOrders(context),
           const Divider(),
-          //Recent Orders
+
           const Padding(
             padding: EdgeInsets.only(left: 18.0),
             child: Text(
@@ -102,7 +88,7 @@ class _Listings extends StatelessWidget {
           ),
 
           SizedBox(
-            height: 500,
+            height: 560,
             child: ListView.builder(
                 itemCount: _listings.length,
                 itemBuilder: (context, index) {
@@ -113,7 +99,7 @@ class _Listings extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                     child: Card(
-                      color: Colors.blue[50],
+                      color: Colors.grey.shade100,
                       elevation: 0.6,
                       clipBehavior: Clip.antiAlias,
                       shape: RoundedRectangleBorder(

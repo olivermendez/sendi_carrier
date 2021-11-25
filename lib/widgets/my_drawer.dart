@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sendi_carriers/models/token.dart';
 import 'package:sendi_carriers/pages/manage_vehicle.dart';
 import 'package:sendi_carriers/pages/profile.dart';
 
 import '../pages/my_documents.dart';
 
 class MyDrawer extends StatefulWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+  final Token token;
+  const MyDrawer({Key? key, required this.token}) : super(key: key);
 
   @override
   State<MyDrawer> createState() => _MyDrawerState();
@@ -74,7 +76,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           ),
                           Container(
                             child: Text(
-                              "Amir Sheikh",
+                              widget.token.user.name,
                               style:
                                   TextStyle(fontSize: 13, fontFamily: 'medium'),
                             ),

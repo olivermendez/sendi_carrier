@@ -26,9 +26,9 @@ Widget totalEarningNCompletedOrders(context) {
                     child: Text(
                       "TOTAL EARNINGS",
                       style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 12,
-                      ),
+                          color: Colors.black54,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -40,7 +40,7 @@ Widget totalEarningNCompletedOrders(context) {
                     "\$2500.95",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'medium'),
                   ),
@@ -89,9 +89,9 @@ Widget totalEarningNCompletedOrders(context) {
                   child: Text(
                     "COMPLETED ORDERS",
                     style: TextStyle(
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 12,
-                    ),
+                        color: Color(0xFFFFFFFF),
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
                 //3rd Row
