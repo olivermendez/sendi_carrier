@@ -4,11 +4,11 @@ import 'listing.dart';
 
 class ListingResponse {
   ListingResponse({
-    required this.qty,
+    this.qty,
     required this.listing,
   });
 
-  int qty;
+  int? qty;
   List<Listing> listing;
 
   factory ListingResponse.fromRawJson(String str) =>

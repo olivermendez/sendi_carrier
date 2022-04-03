@@ -4,11 +4,13 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/config/constant.dart';
 import 'package:sendi_carriers/models/token.dart';
-import 'package:sendi_carriers/pages/home_page.dart';
+import 'package:sendi_carriers/pages/home/home_page.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:sendi_carriers/providers/listing_provider.dart';
+
+import 'no_carrier.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -209,11 +211,19 @@ class _LoginPageState extends State<LoginPage> {
 
     //print(saveToken);
 
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage(token: token)),
-      (Route<dynamic> route) => false,
-    );
+    if (token.user.role == 'carrier') {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage(token: token)),
+        (Route<dynamic> route) => false,
+      );
+    } else {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => NoCarrierAdvice()),
+        (Route<dynamic> route) => false,
+      );
+    }
 
     //var res = await http.post(url, body: body);
   }

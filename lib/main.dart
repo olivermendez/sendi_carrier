@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
       initialRoute: WelcomeScreen.routeName,
       routes: {
         'welcome': (_) => const WelcomeScreen(),
-        'detail': (_) => const DetailPageListing()
       },
     );
   }
