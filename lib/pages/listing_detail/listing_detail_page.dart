@@ -193,7 +193,7 @@ class _DisplayLocationInfoState extends State<DisplayLocationInfo> {
         Row(
           children: [
             Text(
-              widget.locationF.city,
+              widget.locationT.city,
               style: const TextStyle(
                 color: Color(0xFF787878),
                 fontSize: 12,
@@ -216,7 +216,7 @@ class _DisplayLocationInfoState extends State<DisplayLocationInfo> {
         Row(
           children: [
             Text(
-              widget.locationF.state,
+              widget.locationT.state,
               style: const TextStyle(
                 color: Color(0xFF787878),
                 fontSize: 12,
@@ -225,6 +225,97 @@ class _DisplayLocationInfoState extends State<DisplayLocationInfo> {
             ),
           ],
         ),
+        const Divider(),
+        SizedBox(
+          height: 30,
+          child: Stack(
+            children: const [
+              Positioned(
+                left: 0,
+                bottom: 0,
+                child: Text(
+                  "Item Description",
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Row(
+          children: [
+            Text(
+              widget.listing.title,
+              style: const TextStyle(
+                color: Color(0xFF787878),
+                fontSize: 12,
+                fontFamily: 'medium',
+              ),
+            ),
+          ],
+        ),
+        const Divider(),
+        SizedBox(
+          height: 30,
+          child: Stack(
+            children: const [
+              Positioned(
+                left: 0,
+                bottom: 0,
+                child: Text(
+                  "Item Description",
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Row(
+          children: [
+            Text(
+              widget.listing.description,
+              style: const TextStyle(
+                color: Color(0xFF787878),
+                fontSize: 12,
+                fontFamily: 'medium',
+              ),
+            ),
+          ],
+        ),
+        const Divider(),
+        SizedBox(
+          height: 30,
+          child: Stack(
+            children: const [
+              Positioned(
+                left: 0,
+                bottom: 0,
+                child: Text(
+                  "Total Amount",
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Row(
+          children: [
+            Text(
+              widget.price.toString(),
+              style: const TextStyle(
+                color: Color(0xFF787878),
+                fontSize: 12,
+                fontFamily: 'medium',
+              ),
+            ),
+          ],
+        ),
+        const Divider(),
         ElevatedButton(
             onPressed: () {
               //print(widget.locationF.coordinates[]);
@@ -233,17 +324,13 @@ class _DisplayLocationInfoState extends State<DisplayLocationInfo> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => MapSample(
-                            startPositionLong:
-                                widget.locationF.coordinates[0] as double,
-                            startPositionLat:
-                                widget.locationF.coordinates[1] as double,
-                            endPositionLong:
-                                widget.locationT.coordinates[0] as double,
-                            endPositionLat:
-                                widget.locationT.coordinates[1] as double,
+                            startPositionLong: widget.locationF.coordinates[0],
+                            startPositionLat: widget.locationF.coordinates[1],
+                            endPositionLong: widget.locationT.coordinates[0],
+                            endPositionLat: widget.locationT.coordinates[1],
                           )));
             },
-            child: const Text("Accep")),
+            child: const Text("View Destination on Google Maps")),
       ],
     );
   }

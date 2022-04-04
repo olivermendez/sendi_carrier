@@ -8,7 +8,9 @@ import 'package:sendi_carriers/pages/home/home_page.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:sendi_carriers/pages/welcome_login_register/register_page.dart';
 import 'package:sendi_carriers/providers/listing_provider.dart';
+import 'package:sendi_carriers/widgets/app_bar/custom_appBar.dart';
 
 import 'no_carrier.dart';
 
@@ -42,17 +44,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: const Text('Login Page'),
-        backgroundColor: const Color.fromRGBO(37, 59, 128, 5),
+      appBar: CustomAppBar(
+        title: 'Login Page',
       ),
       body: Column(
         children: <Widget>[
           const SizedBox(
             height: 10,
           ),
-          _logoSendiCarrier(),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: loginForm(),
@@ -60,10 +59,6 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
-  }
-
-  Widget _logoSendiCarrier() {
-    return const Text("SENDI CARRIERS!");
   }
 
   Widget loginForm() {
@@ -167,7 +162,10 @@ class _LoginPageState extends State<LoginPage> {
 
             TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/register');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RegisterPage()));
                 },
                 child: const Text("Are you new user ?, Register Now"))
           ],

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapSample extends StatefulWidget {
@@ -35,6 +36,11 @@ class MapSampleState extends State<MapSample> {
   //late Marker _destinationMarker;
   late Polyline _kPolyline;
   late Set<Marker> _markers = {};
+  late CameraPosition _destinationPosition;
+
+  List<LatLng> polylineCoordinates = [];
+  PolylinePoints polylinePoints = PolylinePoints();
+  Map<PolylineId, Polyline> polylines = {};
 
   /*
 
@@ -78,14 +84,47 @@ class MapSampleState extends State<MapSample> {
       ],
       width: 5,
     );
+
+    _destinationPosition = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(widget.endPositionLat, widget.endPositionLong),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414,
+    );
   }
 
-  static const CameraPosition _kLake = CameraPosition(
-    bearing: 192.8334901395799,
-    target: LatLng(37.43296265331129, -122.08832357078792),
-    tilt: 59.440717697143555,
-    zoom: 19.151926040649414,
-  );
+  _getPolyline() async {
+    List<LatLng> polylineCoordinates = [];
+
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      'AIzaSyBTZ87zym2DZTOPcmjKBpTyWS3iggwsRPk',
+      PointLatLng(widget.startPositionLat, widget.startPositionLong),
+      PointLatLng(widget.endPositionLat, widget.endPositionLong),
+      travelMode: TravelMode.driving,
+    );
+
+    if (result.points.isNotEmpty) {
+      for (var point in result.points) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      }
+    } else {
+      print(result.errorMessage);
+    }
+
+    _addPolyLine(polylineCoordinates);
+  }
+
+  _addPolyLine(List<LatLng> polylineCoordinates) {
+    PolylineId id = const PolylineId("poly");
+    Polyline polyline = Polyline(
+      polylineId: id,
+      color: Colors.red,
+      points: polylineCoordinates,
+      width: 5,
+    );
+    polylines[id] = polyline;
+    setState(() {});
+  }
 
   static final Polygon _kPolygon =
       Polygon(polygonId: PolygonId('_kPolygon'), points: [
@@ -97,36 +136,39 @@ class MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
-        polylines: {_kPolyline},
+        polylines: Set<Polyline>.of(polylines.values),
         initialCameraPosition: _initialPosition,
         markers: _markers,
         onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
           Future.delayed(const Duration(milliseconds: 2000), () {
             controller.animateCamera(CameraUpdate.newLatLngBounds(
                 MapUtils.boundsFromLatLngList(
                   _markers.map((loc) => loc.position).toList(),
                 ),
                 1));
+            _getPolyline();
           });
           //_controller.complete(controller);
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          print(widget.startPositionLat);
+          _goToTheLake();
         },
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
+        label: const Text('Ver destino'),
+        icon: const Icon(Icons.directions_car),
       ),
     );
   }
 
   Future<void> _goToTheLake() async {
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+    controller
+        .animateCamera(CameraUpdate.newCameraPosition(_destinationPosition));
   }
 }
 

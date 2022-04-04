@@ -3,7 +3,7 @@ import 'package:sendi_carriers/models/listing.dart';
 
 class AcceptListingPage extends StatefulWidget {
   final Listing listing;
-  AcceptListingPage({required this.listing, Key? key}) : super(key: key);
+  const AcceptListingPage({required this.listing, Key? key}) : super(key: key);
 
   @override
   _AcceptListingPageState createState() => _AcceptListingPageState();
@@ -12,7 +12,7 @@ class AcceptListingPage extends StatefulWidget {
 class _AcceptListingPageState extends State<AcceptListingPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: Center(
       child: Text("Acepted"),
     ));

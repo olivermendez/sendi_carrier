@@ -5,7 +5,6 @@ import 'package:sendi_carriers/models/token.dart';
 import 'package:sendi_carriers/pages/my_account_page.dart';
 
 import 'package:sendi_carriers/providers/data_services.dart';
-import 'package:sendi_carriers/widgets/earnings.dart';
 import 'package:sendi_carriers/widgets/my_drawer.dart';
 
 import '../listing_detail/listing_detail_page.dart';
@@ -124,7 +123,10 @@ class _Listings extends StatelessWidget {
                   opt.comodity,
                   style: const TextStyle(fontSize: 15),
                 ),
-                trailing: Text(opt.status),
+                trailing: Text(
+                  opt.status,
+                  style: const TextStyle(fontSize: 15),
+                ),
                 leading: ConstrainedBox(
                     constraints: const BoxConstraints(
                       minWidth: 64,

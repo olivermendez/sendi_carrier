@@ -51,9 +51,9 @@ class _ManageVehicleState extends State<ManageVehicle> {
                                 },
                                 child: Container(
                                   height: 56,
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 18.0),
-                                  decoration: BoxDecoration(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 18.0),
+                                  decoration: const BoxDecoration(
                                       border: Border(
                                           bottom: BorderSide(
                                               width: 1,
