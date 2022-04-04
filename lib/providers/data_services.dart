@@ -1,11 +1,12 @@
-import 'package:sendi_carriers/models/listing.dart';
+import 'package:sendi_carriers/models/listing/listing.dart';
+import 'package:sendi_carriers/models/user/get_user_listing.dart';
 
 import '../config/constant.dart';
-import '../models/listing_response.dart';
+import '../models/listing/listing_response.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/locations/location_response.dart';
-import '../models/token.dart';
+import '../models/user/token.dart';
 
 class DataServices {
   static Future<ListingResponse?> getNewListing(Token token) async {
@@ -94,5 +95,22 @@ class DataServices {
     final nowListingResponse = LocationResponse.fromRawJson(response.body);
 
     return nowListingResponse.data.first;
+  }
+
+  static Future<UserDetails?> getUserByListing(Listing listing) async {
+    var url = Uri.parse('${Constants.apiUrl}auth/user/${listing.user}');
+
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        //'authorization': "Bearer ${token.token}"
+      },
+    );
+
+    final nowListingResponse = GetUserResponse.fromRawJson(response.body);
+
+    return nowListingResponse.user;
   }
 }

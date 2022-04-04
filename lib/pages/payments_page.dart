@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sendi_carriers/models/token.dart';
+import 'package:sendi_carriers/models/user/token.dart';
 import 'package:sendi_carriers/pages/add_payments.dart';
 
 class PaymentPage extends StatefulWidget {

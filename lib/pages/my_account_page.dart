@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sendi_carriers/models/token.dart';
+import 'package:sendi_carriers/models/user/token.dart';
 
 class MyAccountPage extends StatefulWidget {
   final Token token;

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:sendi_carriers/models/listing.dart';
+import 'package:sendi_carriers/models/listing/listing.dart';
 import 'package:sendi_carriers/models/locations/location_response.dart';
 import 'package:sendi_carriers/pages/map_screen/map_screen.dart';
 
-import '../../models/token.dart';
+import '../../models/user/token.dart';
 import '../../providers/data_services.dart';
+import '../../widgets/app_bar/product_pages.dart';
 
 class DetailPageListing extends StatefulWidget {
   final Listing listing;
@@ -26,7 +27,7 @@ class _DetailPageListingState extends State<DetailPageListing> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _CustomAppBar(widget.listing),
+          AppBarProductPage(widget.listing),
           SliverList(
             delegate: SliverChildListDelegate(
               [
@@ -332,32 +333,6 @@ class _DisplayLocationInfoState extends State<DisplayLocationInfo> {
             },
             child: const Text("View Destination on Google Maps")),
       ],
-    );
-  }
-}
-
-class _CustomAppBar extends StatelessWidget {
-  final Listing listing;
-
-  const _CustomAppBar(this.listing);
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      //backgroundColor: Colors.indigo,
-      expandedHeight: 200,
-      floating: false,
-      pinned: true,
-
-      flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.all(0),
-        centerTitle: true,
-        background: FadeInImage(
-          placeholder: const AssetImage('assets/loading.gif'),
-          image: NetworkImage(listing.photo),
-          fit: BoxFit.cover,
-        ),
-      ),
     );
   }
 }

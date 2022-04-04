@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/config/constant.dart';
-import 'package:sendi_carriers/models/token.dart';
+import 'package:sendi_carriers/models/user/token.dart';
 import 'package:sendi_carriers/pages/home/home_page.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 

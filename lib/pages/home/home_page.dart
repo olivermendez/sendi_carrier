@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:sendi_carriers/models/listing.dart';
-import 'package:sendi_carriers/models/listing_response.dart';
-import 'package:sendi_carriers/models/token.dart';
+import 'package:sendi_carriers/models/listing/listing.dart';
+import 'package:sendi_carriers/models/listing/listing_response.dart';
+import 'package:sendi_carriers/models/user/get_user_listing.dart';
+import 'package:sendi_carriers/models/user/token.dart';
+import 'package:sendi_carriers/models/user/user_model.dart';
 import 'package:sendi_carriers/pages/my_account_page.dart';
 
 import 'package:sendi_carriers/providers/data_services.dart';
+import 'package:sendi_carriers/widgets/app_bar/custom_appBar.dart';
 import 'package:sendi_carriers/widgets/my_drawer.dart';
 
 import '../listing_detail/listing_detail_page.dart';
+import '../listing_detail/booked_listing_details.dart';
 
 class HomePage extends StatefulWidget {
   final Token token;
@@ -24,19 +28,20 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
+            backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
             title: const Text(
               "Find Shipments",
               style: TextStyle(fontSize: 20),
             ),
             bottom: const TabBar(tabs: [
               Tab(
-                text: 'New',
+                text: 'All',
               ),
               Tab(
                 text: 'Processing',
               ),
               Tab(
-                text: 'delivered',
+                text: 'Delivered',
               )
             ]),
             elevation: 3,
@@ -139,15 +144,48 @@ class _Listings extends StatelessWidget {
                       image: NetworkImage(opt.photo),
                     )),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DetailPageListing(
-                                listing: opt,
-                                token: token,
-                              )));
+                  switch (opt.status) {
+                    case 'booked':
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BookedListingDetail(
+                                    listing: opt,
+                                    //token: token,
+                                  )));
+                      break;
+
+                    case 'active':
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailPageListing(
+                                    listing: opt,
+                                    token: token,
+                                  )));
+
+                      break;
+
+                    default:
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const StatusNoDefined()));
+                  }
                 }),
           );
         });
+  }
+}
+
+class StatusNoDefined extends StatelessWidget {
+  const StatusNoDefined({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.red,
+      appBar: CustomAppBar(title: 'status no defined'),
+    );
   }
 }

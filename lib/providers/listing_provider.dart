@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/config/constant.dart';
-import 'package:sendi_carriers/models/listing.dart';
+import 'package:sendi_carriers/models/listing/listing.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:sendi_carriers/models/listing_response.dart';
-import 'package:sendi_carriers/models/token.dart';
+import 'package:sendi_carriers/models/listing/listing_response.dart';
+import 'package:sendi_carriers/models/user/token.dart';
 
 class ListingProvider extends ChangeNotifier {
   var url = Uri.parse('${Constants.apiUrl}listings/');

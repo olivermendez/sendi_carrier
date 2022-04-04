@@ -1,4 +1,4 @@
-import 'package:sendi_carriers/models/user_model.dart';
+import 'package:sendi_carriers/models/user/user_model.dart';
 
 class Token {
   Token({

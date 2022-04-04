@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sendi_carriers/models/listing.dart';
+import 'package:sendi_carriers/models/listing/listing.dart';
 
 class AcceptListingPage extends StatefulWidget {
   final Listing listing;

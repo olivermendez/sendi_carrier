@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sendi_carriers/models/token.dart';
+import 'package:sendi_carriers/models/user/token.dart';
 import 'package:sendi_carriers/pages/manage_vehicle.dart';
 import 'package:sendi_carriers/pages/profile.dart';
 
