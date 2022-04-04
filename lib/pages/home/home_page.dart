@@ -10,6 +10,7 @@ import 'package:sendi_carriers/providers/data_services.dart';
 import 'package:sendi_carriers/widgets/app_bar/custom_appBar.dart';
 import 'package:sendi_carriers/widgets/my_drawer.dart';
 
+import '../listing_detail/delivered_listing_details.dart';
 import '../listing_detail/listing_detail_page.dart';
 import '../listing_detail/booked_listing_details.dart';
 
@@ -168,7 +169,7 @@ class _Listings extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => BookedListingDetail(
                                     listing: opt,
-                                    //token: token,
+                                    token: token,
                                   )));
                       break;
 
@@ -177,6 +178,17 @@ class _Listings extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => DetailPageListing(
+                                    listing: opt,
+                                    token: token,
+                                  )));
+
+                      break;
+
+                    case 'delivered':
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DeliveredListingDetail(
                                     listing: opt,
                                     token: token,
                                   )));

@@ -13,23 +13,23 @@ import 'package:http/http.dart' as http;
 
 import '../home/home_page.dart';
 
-class BookedListingDetail extends StatefulWidget {
+class DeliveredListingDetail extends StatefulWidget {
   final Listing listing;
   final Token token;
 
-  const BookedListingDetail(
+  const DeliveredListingDetail(
       {Key? key, required this.listing, required this.token})
       : super(key: key);
 
   @override
-  State<BookedListingDetail> createState() => _BookedListingDetailState();
+  State<DeliveredListingDetail> createState() => _DeliveredListingDetailState();
 }
 
-class _BookedListingDetailState extends State<BookedListingDetail> {
+class _DeliveredListingDetailState extends State<DeliveredListingDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Listing Booked'),
+      appBar: CustomAppBar(title: 'Listing Delivered'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -46,14 +46,9 @@ class _BookedListingDetailState extends State<BookedListingDetail> {
                   image: NetworkImage(widget.listing.photo),
                 )),
             Text(widget.listing.title),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Center(
-                child: Text(
-                  widget.listing.description,
-                  style: const TextStyle(color: Colors.grey, fontSize: 15),
-                ),
-              ),
+            Text(
+              widget.listing.description,
+              style: const TextStyle(color: Colors.grey),
             ),
             getUserByListing(),
             const Divider(),
@@ -63,57 +58,13 @@ class _BookedListingDetailState extends State<BookedListingDetail> {
             ),
             Text(widget.listing.quantity),
             const Divider(),
+            const Text("Conductor"),
+            Text(widget.token.user.name),
+            const Divider(),
           ],
         ),
       ),
-      bottomNavigationBar: MaterialButton(
-        //minWidth: 10.0,
-        elevation: 10,
-        height: 100,
-        color: const Color.fromARGB(255, 0, 82, 26),
-        child: const Text('Entregado',
-            style: TextStyle(
-                fontSize: 26.0,
-                color: Colors.white,
-                fontWeight: FontWeight.bold)),
-        onPressed: () {
-          markAsDelivered('delivered');
-        },
-      ),
     );
-  }
-
-  Future<void> markAsDelivered(
-    final String _status,
-  ) async {
-    Map<String, dynamic> request = {
-      "status": _status,
-    };
-    //print("AQUIIII: " + widget.id);
-
-    //var url = Uri.parse('${Constants.apiUrl}listings/${token.user.id}/vehicle');
-    var url = Uri.parse('${Constants.apiUrl}listings/${widget.listing.id}');
-
-    var response = await http.put(
-      url,
-      body: jsonEncode(request),
-      headers: {
-        'content-type': 'application/json',
-        'accept': 'application/json',
-        'Authorization': 'Bearer ${widget.token.token}'
-      },
-    );
-    //var body = response.body;
-    //var decodedJson = jsonDecode(body);
-    //var listing = ListingResponse.fromJson(decodedJson);
-    //print(listing.listing);
-
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomePage(
-                  token: widget.token,
-                )));
   }
 
   Widget getUserByListing() {
