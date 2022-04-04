@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sendi_carriers/models/listing.dart';
 import 'package:sendi_carriers/models/locations/location_response.dart';
-import 'package:sendi_carriers/pages/accept_listing_page.dart';
+import 'package:sendi_carriers/pages/map_screen/map_screen.dart';
 
-import '../models/token.dart';
-import '../providers/data_services.dart';
+import '../../models/token.dart';
+import '../../providers/data_services.dart';
 
 class DetailPageListing extends StatefulWidget {
   final Listing listing;
@@ -22,10 +23,6 @@ class DetailPageListing extends StatefulWidget {
 class _DetailPageListingState extends State<DetailPageListing> {
   @override
   Widget build(BuildContext context) {
-    //Datum data = DataServices.getPrice(widget.token, widget.listing) as Datum;
-    // final Listing listing =
-    //    ModalRoute.of(context)!.settings.arguments as Listing;
-
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -36,6 +33,7 @@ class _DetailPageListingState extends State<DetailPageListing> {
                 getListingDetails(),
                 ButtonActionOnListing(
                   listing: widget.listing,
+                  token: widget.token,
                 ),
               ],
             ),
@@ -66,6 +64,7 @@ class _DetailPageListingState extends State<DetailPageListing> {
               price: snapshot.data!.data[0].price,
               category: snapshot.data!.data[0].category,
               listing: widget.listing,
+              token: widget.token,
             ),
           );
         }
@@ -89,17 +88,19 @@ class DisplayLocationInfo extends StatefulWidget {
   int price;
   String category;
   Listing listing;
+  final Token token;
 
-  DisplayLocationInfo(
-      {Key? key,
-      required this.locationF,
-      required this.locationT,
-      required this.startDestination,
-      required this.endDestination,
-      required this.price,
-      required this.category,
-      required this.listing})
-      : super(key: key);
+  DisplayLocationInfo({
+    Key? key,
+    required this.locationF,
+    required this.locationT,
+    required this.startDestination,
+    required this.endDestination,
+    required this.price,
+    required this.category,
+    required this.listing,
+    required this.token,
+  }) : super(key: key);
 
   @override
   State<DisplayLocationInfo> createState() => _DisplayLocationInfoState();
@@ -224,6 +225,25 @@ class _DisplayLocationInfoState extends State<DisplayLocationInfo> {
             ),
           ],
         ),
+        ElevatedButton(
+            onPressed: () {
+              //print(widget.locationF.coordinates[]);
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MapSample(
+                            startPositionLong:
+                                widget.locationF.coordinates[0] as double,
+                            startPositionLat:
+                                widget.locationF.coordinates[1] as double,
+                            endPositionLong:
+                                widget.locationT.coordinates[0] as double,
+                            endPositionLat:
+                                widget.locationT.coordinates[1] as double,
+                          )));
+            },
+            child: const Text("Accep")),
       ],
     );
   }
@@ -256,8 +276,10 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class ButtonActionOnListing extends StatelessWidget {
+  final Token token;
   final Listing listing;
-  const ButtonActionOnListing({required this.listing, Key? key})
+  const ButtonActionOnListing(
+      {required this.listing, required this.token, Key? key})
       : super(key: key);
 
   @override
@@ -268,12 +290,7 @@ class ButtonActionOnListing extends StatelessWidget {
         minWidth: double.infinity,
         child: MaterialButton(
           color: Colors.blue[900],
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => AcceptListingPage(listing: listing)));
-          },
+          onPressed: () {},
           child: const Text(
             'Accept Listing',
             style: TextStyle(color: Colors.white),

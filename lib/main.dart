@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sendi_carriers/config/theme.dart';
-import 'package:sendi_carriers/pages/listing_detail_page.dart';
+import 'package:sendi_carriers/pages/listing_detail/listing_detail_page.dart';
 import 'package:sendi_carriers/pages/welcome_login_register/welcome_screen.dart';
 import 'package:sendi_carriers/providers/listing_provider.dart';
 

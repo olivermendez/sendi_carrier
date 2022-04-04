@@ -8,7 +8,7 @@ import 'package:sendi_carriers/providers/data_services.dart';
 import 'package:sendi_carriers/widgets/earnings.dart';
 import 'package:sendi_carriers/widgets/my_drawer.dart';
 
-import '../listing_detail_page.dart';
+import '../listing_detail/listing_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   final Token token;
