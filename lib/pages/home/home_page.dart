@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sendi_carriers/models/listing/listing.dart';
 import 'package:sendi_carriers/models/listing/listing_response.dart';
-import 'package:sendi_carriers/models/user/get_user_listing.dart';
+//import 'package:sendi_carriers/models/user/get_user_listing.dart';
 import 'package:sendi_carriers/models/user/token.dart';
-import 'package:sendi_carriers/models/user/user_model.dart';
-import 'package:sendi_carriers/pages/my_account_page.dart';
+//import 'package:sendi_carriers/models/user/user_model.dart';
+//import 'package:sendi_carriers/pages/my_account_page.dart';
 
 import 'package:sendi_carriers/providers/data_services.dart';
 import 'package:sendi_carriers/widgets/app_bar/custom_appBar.dart';
@@ -28,22 +28,39 @@ class _HomePageState extends State<HomePage> {
       length: 3,
       child: Scaffold(
           appBar: AppBar(
+            centerTitle: false,
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage('assets/deliver.png'),
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.bottomRight,
+              )),
+            ),
             backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
             title: const Text(
               "Find Shipments",
               style: TextStyle(fontSize: 20),
             ),
-            bottom: const TabBar(tabs: [
-              Tab(
-                text: 'All',
-              ),
-              Tab(
-                text: 'Processing',
-              ),
-              Tab(
-                text: 'Delivered',
-              )
-            ]),
+            bottom: const TabBar(
+                labelColor: Colors.white,
+                indicatorWeight: 5,
+                labelStyle: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+                indicatorColor: Colors.red,
+                tabs: [
+                  Tab(
+                    text: 'All',
+                  ),
+                  Tab(
+                    text: 'Processing',
+                  ),
+                  Tab(
+                    text: 'Delivered',
+                  )
+                ]),
             elevation: 3,
           ),
           drawer: MyDrawer(token: widget.token),
